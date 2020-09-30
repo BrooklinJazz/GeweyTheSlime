@@ -11,7 +11,6 @@ func _init(Body, Legs):
 	
 func main():
 	self.set_facing_direction()
-	self.set_current_animation()
 	self.play_current_animation()
 	
 func set_facing_direction():
@@ -20,12 +19,11 @@ func set_facing_direction():
 	elif (Player.state.direction == Enums.Direction.RIGHT):
 		self.body.flip_h = false
 
-func set_current_animation():
+func play_current_animation():
 	match Player.state.movement:
 		Enums.Movement.WALK:
 			self.body.set_animation("default")
 			self.legs.set_animation("walk")
-			pass
 		Enums.Movement.GRIP:
 			self.body.set_animation("grip")
 			self.legs.set_animation("grip")
@@ -34,9 +32,10 @@ func set_current_animation():
 			self.body.play("charge_jump")
 			return
 #	set animation defaults to start playing for some reason
-	self.legs.stop()	
+	self.legs.stop()
+	self.iterate_animation()
 	
-func play_current_animation():
+func iterate_animation():
 	#	TODO - we probably have to make this work with delta to make frames match Enums.Movement
 	var numberOfFrames = self.legs.get_sprite_frames().get_frame_count(self.legs.get_animation())
 	match Player.state.direction:

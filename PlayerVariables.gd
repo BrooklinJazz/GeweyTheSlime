@@ -22,7 +22,7 @@ enum Airborn {
 	IDLE
 }
 
-var state = {
+export var state = {
 	"movement": Movement.WALK,
 	"direction": Direction.CENTER,
 	"airborn": Airborn.FALLING
