@@ -8,6 +8,13 @@ var character
 func _init(parent):
 	character = parent
 	
+func main():
+	PlayerVariables.state = {
+		"airborn": airborn_factory(),
+		"direction": direction_factory(),
+		"movement": movement_factory()
+	}
+	
 func direction_factory():
 	if (Input.is_action_pressed("right") and Input.is_action_pressed("left")):
 		return PlayerVariables.Direction.CENTER
@@ -36,10 +43,3 @@ func airborn_factory():
 		return PlayerVariables.Airborn.ON_CEILING
 	else:
 		return PlayerVariables.Airborn.IDLE
-
-func main():
-	PlayerVariables.state = {
-		"airborn": airborn_factory(),
-		"direction": direction_factory(),
-		"movement": movement_factory()
-	}

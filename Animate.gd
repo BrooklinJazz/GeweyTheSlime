@@ -1,6 +1,6 @@
 extends Node
 
-class_name PlayerAnimator
+class_name PlayerAnimate
 
 func main(Body, Legs):
 	if (PlayerVariables.state.direction == PlayerVariables.Direction.LEFT):
