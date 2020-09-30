@@ -36,6 +36,11 @@ config/name="spritedemo"
 run/main_scene="res://Player.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+PlayerVariables="*res://PlayerVariables.gd"
+StateEnums="*res://StateEnums.gd"
+
 [input]
 
 left={

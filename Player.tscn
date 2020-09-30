@@ -10,8 +10,8 @@
 [ext_resource path="res://icon.png" type="Texture" id=8]
 [ext_resource path="res://StateMachine.gd" type="Script" id=9]
 [ext_resource path="res://Animate.gd" type="Script" id=10]
-[ext_resource path="res://StateEnums.gd" type="Script" id=11]
 [ext_resource path="res://Physics.gd" type="Script" id=12]
+[ext_resource path="res://PlayerVariables.gd" type="Script" id=13]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 13.9702, 7.37109 )
@@ -193,11 +193,13 @@ script = ExtResource( 9 )
 [node name="Animate" type="Node" parent="Character"]
 script = ExtResource( 10 )
 
-[node name="StateEnums" type="Node" parent="Character"]
-script = ExtResource( 11 )
-
 [node name="Physics" type="Node" parent="Character"]
 script = ExtResource( 12 )
+
+[node name="PlayerVariables" type="Node" parent="Character"]
+script = ExtResource( 13 )
+
+[node name="StateEnums" type="Node" parent="Character"]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
