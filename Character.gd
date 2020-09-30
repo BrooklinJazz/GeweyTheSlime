@@ -22,52 +22,9 @@ enum Airborn {
 	IDLE
 }
 
-const SPEED = 100
-
-var movement = Movement.WALK
-var direction = Direction.CENTER
-var airborn = Airborn.FALLING
 var motion = Vector2()
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
 
-func direction_factory():
-	if (Input.is_action_pressed("right") and Input.is_action_pressed("left")):
-		return Direction.CENTER
-	elif (Input.is_action_pressed("left")):
-		return Direction.LEFT
-	elif (Input.is_action_pressed("right")):
-		return Direction.RIGHT
-	else:
-		return Direction.CENTER
-
-func movement_factory():
-	if (Input.is_action_pressed("jump")):
-		return Movement.JUMP_CHARGE
-	elif (Input.is_action_pressed("grip")):
-		return Movement.GRIP
-	else:
-		return Movement.WALK
-		
-func airborn_factory():
-#	TODO - expand this factory to introduce all states
-	if (Input.is_action_just_released("jump") and is_on_floor()):
-		return Airborn.JUMPED
-	elif (is_on_floor()):
-		return Airborn.ON_FLOOR
-	elif (is_on_ceiling()):
-		return Airborn.ON_CEILING
-	else:
-		return Airborn.IDLE
-	
-func state_factory():
-	return {
-		"airborn": airborn_factory(),
-		"direction": direction_factory(),
-		"movement": movement_factory()
-	}
-
+const SPEED = 100
 const GRIP_SPEED = 100 * 50
 const WALK_SPEED = 200 * 50
 const GRAVITY = 400
@@ -93,48 +50,17 @@ func gravity(state, delta):
 		motion.y = 0
 	else:
 		motion.y += GRAVITY * delta
+		
+var Animator = PlayerAnimator.new()		
 
 func _process(delta):
-	var state = state_factory()
+	var state = PlayerStateMachine.new(self).create()
 	walk(state, delta)
 	gravity(state, delta)
 	jump(state, delta)
 	move_and_slide(motion, Vector2.UP)
-	animate(state)
+	Animator.animate(state, $Body, $Legs)
 	
 func jump(state, delta):
 	if (state.airborn == Airborn.JUMPED):
 		motion.y -= JUMP_FORCE * delta
-
-func animate(state):
-	if (state.direction == Direction.LEFT):
-		$Body.flip_h = true
-	elif (state.direction == Direction.RIGHT):
-		$Body.flip_h = false
-	match state.movement:
-		Movement.WALK:
-			$Body.set_animation("default")
-			$Legs.set_animation("walk")
-			pass
-		Movement.GRIP:
-			$Body.set_animation("grip")
-			$Legs.set_animation("grip")
-		Movement.JUMP_CHARGE:
-			$Legs.play("charge_jump")
-			$Body.play("charge_jump")
-			return
-#	set animation defaults to start playing for some reason
-	$Legs.stop()	
-#	TODO - we probably have to make this work with delta to make frames match movement
-	var numberOfFrames = $Legs.get_sprite_frames().get_frame_count($Legs.get_animation())
-	match state.direction:
-		Direction.CENTER:
-			pass
-		Direction.LEFT:
-			#	TODO - figure out how to improve logic
-			if ($Legs.get_frame() == 0):
-				$Legs.set_frame(7)
-			else:
-				$Legs.set_frame(($Legs.get_frame() - 1))		
-		Direction.RIGHT:
-			$Legs.set_frame(($Legs.get_frame() + 1) % numberOfFrames)
