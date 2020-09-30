@@ -17,29 +17,29 @@ func main():
 	
 func direction_factory():
 	if (Input.is_action_pressed("right") and Input.is_action_pressed("left")):
-		return Player.Direction.CENTER
+		return Enums.Direction.CENTER
 	elif (Input.is_action_pressed("left")):
-		return Player.Direction.LEFT
+		return Enums.Direction.LEFT
 	elif (Input.is_action_pressed("right")):
-		return Player.Direction.RIGHT
+		return Enums.Direction.RIGHT
 	else:
-		return Player.Direction.CENTER
+		return Enums.Direction.CENTER
 
 func movement_factory():
 	if (Input.is_action_pressed("jump")):
-		return Player.Movement.JUMP_CHARGE
+		return Enums.Movement.JUMP_CHARGE
 	elif (Input.is_action_pressed("grip")):
-		return Player.Movement.GRIP
+		return Enums.Movement.GRIP
 	else:
-		return Player.Movement.WALK
+		return Enums.Movement.WALK
 		
 func airborn_factory():
 #	TODO - expand this factory to introduce all states
 	if (Input.is_action_just_released("jump") and self.character.is_on_floor()):
-		return Player.Airborn.JUMPED
+		return Enums.Airborn.JUMPED
 	elif (self.character.is_on_floor()):
-		return Player.Airborn.ON_FLOOR
+		return Enums.Airborn.ON_FLOOR
 	elif (self.character.is_on_ceiling()):
-		return Player.Airborn.ON_CEILING
+		return Enums.Airborn.ON_CEILING
 	else:
-		return Player.Airborn.IDLE
+		return Enums.Airborn.IDLE

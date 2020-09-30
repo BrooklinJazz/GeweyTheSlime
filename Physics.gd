@@ -13,27 +13,27 @@ func _init(parent):
 	character = parent
 	
 func get_speed(movement):
-	if (movement == Player.Movement.GRIP):
+	if (movement == Enums.Movement.GRIP):
 		return GRIP_SPEED
 	else:
 		return WALK_SPEED
 
 func walk(state, delta):
 	var speed = get_speed(state.movement)
-	if (state.direction == Player.Direction.LEFT):
+	if (state.direction == Enums.Direction.LEFT):
 		Player.motion.x = -speed * delta
-	elif (state.direction == Player.Direction.RIGHT):
+	elif (state.direction == Enums.Direction.RIGHT):
 		Player.motion.x = speed * delta
 	else:
 		Player.motion.x = 0
 		
 func gravity(state, delta):
-	if (state.airborn == Player.Airborn.ON_FLOOR):
+	if (state.airborn == Enums.Airborn.ON_FLOOR):
 		Player.motion.y = 0
 	else:
 		Player.motion.y += GRAVITY * delta
 func jump(state, delta):
-	if (state.airborn == Player.Airborn.JUMPED):
+	if (state.airborn == Enums.Airborn.JUMPED):
 		Player.motion.y -= JUMP_FORCE * delta
 
 func main(delta):
