@@ -136,7 +136,7 @@ region = Rect2( 56, 0, 28, 11 )
 animations = [ {
 "frames": [ ExtResource( 2 ) ],
 "loop": true,
-"name": "idle",
+"name": "default",
 "speed": 1.0
 }, {
 "frames": [ SubResource( 20 ), SubResource( 21 ), SubResource( 22 ) ],
@@ -151,7 +151,7 @@ animations = [ {
 } ]
 
 [sub_resource type="RectangleShape2D" id=27]
-extents = Vector2( 62.4917, 58.4276 )
+extents = Vector2( 62.4917, 57.531 )
 
 [node name="Player" type="Node2D"]
 
@@ -174,8 +174,6 @@ __meta__ = {
 [node name="Body" type="AnimatedSprite" parent="Character"]
 position = Vector2( 0, -2.86112 )
 frames = SubResource( 26 )
-animation = "grip"
-frame = 2
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -183,7 +181,7 @@ __meta__ = {
 
 [node name="Camera2D" type="Camera2D" parent="Character"]
 current = true
-zoom = Vector2( 0.1, 0.1 )
+zoom = Vector2( 0.3, 0.3 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
