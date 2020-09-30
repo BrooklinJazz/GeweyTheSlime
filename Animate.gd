@@ -2,7 +2,7 @@ extends Node
 
 class_name PlayerAnimator
 
-func animate(Body, Legs):
+func main(Body, Legs):
 	if (PlayerVariables.state.direction == PlayerVariables.Direction.LEFT):
 		Body.flip_h = true
 	elif (PlayerVariables.state.direction == PlayerVariables.Direction.RIGHT):

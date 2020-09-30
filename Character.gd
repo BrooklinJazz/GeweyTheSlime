@@ -5,7 +5,7 @@ var Physics = PlayerPhysics.new(self)
 var StateMachine = PlayerStateMachine.new(self)
 
 func _process(delta):
-	StateMachine.create()
+	StateMachine.main()
 	Physics.main(delta)
-	Animator.animate($Body, $Legs)
+	Animator.main($Body, $Legs)
 

@@ -36,8 +36,8 @@ func airborn_factory():
 		return PlayerVariables.Airborn.ON_CEILING
 	else:
 		return PlayerVariables.Airborn.IDLE
-	
-func create():
+
+func main():
 	PlayerVariables.state = {
 		"airborn": airborn_factory(),
 		"direction": direction_factory(),
