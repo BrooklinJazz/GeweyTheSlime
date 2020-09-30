@@ -1,10 +1,15 @@
 extends KinematicBody2D
 
-var Animate = PlayerAnimate.new()		
-var Physics = PlayerPhysics.new(self)
-var StateMachine = PlayerStateMachine.new(self)
+var Animate	
+var Physics
+var StateMachine
+
+func _ready():
+	Animate = PlayerAnimate.new($Body, $Legs)
+	Physics = PlayerPhysics.new(self)
+	StateMachine = PlayerStateMachine.new(self)
 
 func _process(delta):
 	StateMachine.main()
 	Physics.main(delta)
-	Animate.main($Body, $Legs)
+	Animate.main()
