@@ -15,12 +15,18 @@ _global_script_classes=[ {
 "path": "res://Animate.gd"
 }, {
 "base": "Node",
+"class": "PlayerPhysics",
+"language": "GDScript",
+"path": "res://Physics.gd"
+}, {
+"base": "Node",
 "class": "PlayerStateMachine",
 "language": "GDScript",
 "path": "res://StateMachine.gd"
 } ]
 _global_script_class_icons={
 "PlayerAnimator": "",
+"PlayerPhysics": "",
 "PlayerStateMachine": ""
 }
 

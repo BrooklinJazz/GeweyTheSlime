@@ -1,31 +1,8 @@
 extends Node
 
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
-enum Direction {
-	LEFT,
-	RIGHT,
-	CENTER
-}
-
-enum Movement {
-	WALK,
-	GRIP,
-	JUMP_CHARGE
-}
-
-enum Airborn {
-	RISING,
-	FALLING,
-	ON_FLOOR,
-	ON_CEILING,
-	JUMPED,
-	ON_WALL,
-	IDLE
-}
+var Direction = load("./StateEnums.gd").Direction
+var Movement = load("./StateEnums.gd").Movement
+var Airborn = load("./StateEnums.gd").Airborn
 
 class_name PlayerAnimator
 
