@@ -1,5 +1,4 @@
 extends KinematicBody2D
-class_name StateMachine
 
 enum Direction {
 	LEFT,
@@ -18,6 +17,7 @@ enum Airborn {
 	FALLING,
 	ON_FLOOR,
 	ON_CEILING,
+	JUMPED,
 	ON_WALL,
 	IDLE
 }
@@ -51,7 +51,10 @@ func movement_factory():
 		return Movement.WALK
 		
 func airborn_factory():
-	if (is_on_floor()):
+#	TODO - expand this factory to introduce all states
+	if (Input.is_action_just_released("jump") and is_on_floor()):
+		return Airborn.JUMPED
+	elif (is_on_floor()):
 		return Airborn.ON_FLOOR
 	elif (is_on_ceiling()):
 		return Airborn.ON_CEILING
@@ -68,6 +71,7 @@ func state_factory():
 const GRIP_SPEED = 100 * 50
 const WALK_SPEED = 200 * 50
 const GRAVITY = 400
+const JUMP_FORCE = 1000 * 15
 
 func get_speed(movement):
 	if (movement == Movement.GRIP):
@@ -86,17 +90,21 @@ func walk(state, delta):
 		
 func gravity(state, delta):
 	if (state.airborn == Airborn.ON_FLOOR):
-		pass
+		motion.y = 0
 	else:
 		motion.y += GRAVITY * delta
-		
 
 func _process(delta):
 	var state = state_factory()
 	walk(state, delta)
 	gravity(state, delta)
+	jump(state, delta)
 	move_and_slide(motion, Vector2.UP)
 	animate(state)
+	
+func jump(state, delta):
+	if (state.airborn == Airborn.JUMPED):
+		motion.y -= JUMP_FORCE * delta
 
 func animate(state):
 	if (state.direction == Direction.LEFT):
@@ -112,11 +120,11 @@ func animate(state):
 			$Body.set_animation("grip")
 			$Legs.set_animation("grip")
 		Movement.JUMP_CHARGE:
-			$Legs.set_animation("charge_jump")
-			$Body.set_animation("charge_jump")
+			$Legs.play("charge_jump")
+			$Body.play("charge_jump")
+			return
 #	set animation defaults to start playing for some reason
 	$Legs.stop()	
-
 #	TODO - we probably have to make this work with delta to make frames match movement
 	var numberOfFrames = $Legs.get_sprite_frames().get_frame_count($Legs.get_animation())
 	match state.direction:
@@ -130,4 +138,3 @@ func animate(state):
 				$Legs.set_frame(($Legs.get_frame() - 1))		
 		Direction.RIGHT:
 			$Legs.set_frame(($Legs.get_frame() + 1) % numberOfFrames)
-			
