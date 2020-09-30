@@ -9,7 +9,7 @@ func _init(parent):
 	character = parent
 	
 func main():
-	PlayerVariables.state = {
+	Player.state = {
 		"airborn": airborn_factory(),
 		"direction": direction_factory(),
 		"movement": movement_factory()
@@ -17,29 +17,29 @@ func main():
 	
 func direction_factory():
 	if (Input.is_action_pressed("right") and Input.is_action_pressed("left")):
-		return PlayerVariables.Direction.CENTER
+		return Player.Direction.CENTER
 	elif (Input.is_action_pressed("left")):
-		return PlayerVariables.Direction.LEFT
+		return Player.Direction.LEFT
 	elif (Input.is_action_pressed("right")):
-		return PlayerVariables.Direction.RIGHT
+		return Player.Direction.RIGHT
 	else:
-		return PlayerVariables.Direction.CENTER
+		return Player.Direction.CENTER
 
 func movement_factory():
 	if (Input.is_action_pressed("jump")):
-		return PlayerVariables.Movement.JUMP_CHARGE
+		return Player.Movement.JUMP_CHARGE
 	elif (Input.is_action_pressed("grip")):
-		return PlayerVariables.Movement.GRIP
+		return Player.Movement.GRIP
 	else:
-		return PlayerVariables.Movement.WALK
+		return Player.Movement.WALK
 		
 func airborn_factory():
 #	TODO - expand this factory to introduce all states
 	if (Input.is_action_just_released("jump") and self.character.is_on_floor()):
-		return PlayerVariables.Airborn.JUMPED
+		return Player.Airborn.JUMPED
 	elif (self.character.is_on_floor()):
-		return PlayerVariables.Airborn.ON_FLOOR
+		return Player.Airborn.ON_FLOOR
 	elif (self.character.is_on_ceiling()):
-		return PlayerVariables.Airborn.ON_CEILING
+		return Player.Airborn.ON_CEILING
 	else:
-		return PlayerVariables.Airborn.IDLE
+		return Player.Airborn.IDLE

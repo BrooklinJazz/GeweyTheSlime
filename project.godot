@@ -38,8 +38,7 @@ config/icon="res://icon.png"
 
 [autoload]
 
-PlayerVariables="*res://PlayerVariables.gd"
-StateEnums="*res://StateEnums.gd"
+Player="*res://PlayerVariables.gd"
 
 [input]
 
