@@ -10,6 +10,11 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Node",
+"class": "CeilingMovement",
+"language": "GDScript",
+"path": "res://CeilingMovement.gd"
+}, {
+"base": "Node",
 "class": "GroundMovement",
 "language": "GDScript",
 "path": "res://GroundMovement.gd"
@@ -35,6 +40,7 @@ _global_script_classes=[ {
 "path": "res://WallMovement.gd"
 } ]
 _global_script_class_icons={
+"CeilingMovement": "",
 "GroundMovement": "",
 "PlayerAnimate": "",
 "PlayerPhysics": "",

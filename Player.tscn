@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=2]
+[gd_scene load_steps=44 format=2]
 
 [ext_resource path="res://slime-legs-walk-Sheet.png" type="Texture" id=1]
 [ext_resource path="res://slime-body.png" type="Texture" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://PlayerVariables.gd" type="Script" id=13]
 [ext_resource path="res://GroundMovement.gd" type="Script" id=14]
 [ext_resource path="res://WallMovement.gd" type="Script" id=15]
+[ext_resource path="res://CeilingMovement.gd" type="Script" id=16]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 13.9702, 7.37109 )
@@ -205,6 +206,9 @@ script = ExtResource( 14 )
 [node name="WallMovement" type="Node" parent="Character/Physics"]
 script = ExtResource( 15 )
 
+[node name="CeilingMovement" type="Node" parent="Character/Physics"]
+script = ExtResource( 16 )
+
 [node name="PlayerVariables" type="Node" parent="Character"]
 script = ExtResource( 13 )
 
@@ -221,6 +225,17 @@ texture = ExtResource( 8 )
 position = Vector2( -1.70705, 69.562 )
 shape = SubResource( 27 )
 
+[node name="StaticBody2D3" type="StaticBody2D" parent="."]
+position = Vector2( -40.9521, -173.547 )
+
+[node name="Sprite" type="Sprite" parent="StaticBody2D3"]
+position = Vector2( -2.43322, 76.0648 )
+texture = ExtResource( 8 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
+position = Vector2( -1.70705, 83.0462 )
+shape = SubResource( 27 )
+
 [node name="StaticBody2D2" type="StaticBody2D" parent="."]
 position = Vector2( 119.361, -113.368 )
 
@@ -229,5 +244,5 @@ position = Vector2( -2.43322, 76.0648 )
 texture = ExtResource( 8 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
-position = Vector2( -1.70705, 69.562 )
+position = Vector2( -3.70473, 69.3123 )
 shape = SubResource( 27 )

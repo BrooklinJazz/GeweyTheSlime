@@ -1,7 +1,9 @@
 extends Node
 
 func movement_factory(character):
-	if (Player.state.airborn == Enums.Airborn.ON_WALL and Player.state.movement == Enums.Movement.GRIP):
+	if (Player.state.airborn == Enums.Airborn.ON_CEILING and Player.state.movement == Enums.Movement.GRIP):
+		return CeilingMovement.new(character)
+	elif (Player.state.airborn == Enums.Airborn.ON_WALL and Player.state.movement == Enums.Movement.GRIP):
 		return WallMovement.new(character)
 	else:
 		return GroundMovement.new(character)
