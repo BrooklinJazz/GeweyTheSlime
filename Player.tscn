@@ -186,7 +186,7 @@ __meta__ = {
 
 [node name="Camera2D" type="Camera2D" parent="Character"]
 current = true
-zoom = Vector2( 0.3, 0.3 )
+zoom = Vector2( 0.4, 0.4 )
 
 [node name="StateMachine" type="Node" parent="Character"]
 script = ExtResource( 9 )
@@ -210,5 +210,16 @@ position = Vector2( -2.43322, 76.0648 )
 texture = ExtResource( 8 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( -1.70705, 69.562 )
+shape = SubResource( 27 )
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2( 119.361, -113.368 )
+
+[node name="Sprite" type="Sprite" parent="StaticBody2D2"]
+position = Vector2( -2.43322, 76.0648 )
+texture = ExtResource( 8 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
 position = Vector2( -1.70705, 69.562 )
 shape = SubResource( 27 )

@@ -12,33 +12,34 @@ var character
 func _init(parent):
 	character = parent
 	
-func get_speed(movement):
-	if (movement == Enums.Movement.GRIP):
+func get_speed():
+	if (Player.state.movement == Enums.Movement.GRIP):
 		return GRIP_SPEED
 	else:
 		return WALK_SPEED
 
-func walk(state, delta):
-	var speed = get_speed(state.movement)
-	if (state.direction == Enums.Direction.LEFT):
+func walk(delta):
+	var speed = get_speed()
+	if (Player.state.direction == Enums.Direction.LEFT):
 		Player.motion.x = -speed * delta
-	elif (state.direction == Enums.Direction.RIGHT):
+	elif (Player.state.direction == Enums.Direction.RIGHT):
 		Player.motion.x = speed * delta
 	else:
 		Player.motion.x = 0
 		
-func gravity(state, delta):
-	if (state.airborn == Enums.Airborn.ON_FLOOR):
+func gravity(delta):
+	if (Player.state.airborn == Enums.Airborn.ON_FLOOR):
 		Player.motion.y = 0
 	else:
 		Player.motion.y += GRAVITY * delta
-func jump(state, delta):
-	if (state.airborn == Enums.Airborn.JUMPED):
+
+func jump(delta):
+	if (Player.state.airborn == Enums.Airborn.JUMPED):
 		Player.motion.y -= JUMP_FORCE * delta
 
 func main(delta):
-	walk(Player.state, delta)
-	gravity(Player.state, delta)
-	jump(Player.state, delta)
+	gravity(delta)
+	walk(delta)
+	jump(delta)
 	self.character.move_and_slide(Player.motion, Vector2.UP)
 
