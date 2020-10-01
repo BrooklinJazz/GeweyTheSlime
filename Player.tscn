@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=2]
+[gd_scene load_steps=42 format=2]
 
 [ext_resource path="res://slime-legs-walk-Sheet.png" type="Texture" id=1]
 [ext_resource path="res://slime-body.png" type="Texture" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://Enums.gd" type="Script" id=11]
 [ext_resource path="res://Physics.gd" type="Script" id=12]
 [ext_resource path="res://PlayerVariables.gd" type="Script" id=13]
+[ext_resource path="res://GroundMovement.gd" type="Script" id=14]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 13.9702, 7.37109 )
@@ -196,6 +197,9 @@ script = ExtResource( 10 )
 
 [node name="Physics" type="Node" parent="Character"]
 script = ExtResource( 12 )
+
+[node name="GroundMovement" type="Node" parent="Character/Physics"]
+script = ExtResource( 14 )
 
 [node name="PlayerVariables" type="Node" parent="Character"]
 script = ExtResource( 13 )
