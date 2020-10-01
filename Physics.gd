@@ -1,10 +1,17 @@
 extends Node
 
+func movement_factory(character):
+	if (Player.state.airborn == Enums.Airborn.ON_WALL and Player.state.movement == Enums.Movement.GRIP):
+		return WallMovement.new(character)
+	else:
+		return GroundMovement.new(character)
+
 class_name PlayerPhysics
 
-var movement
-func _init(character):
-	movement = GroundMovement.new(character)
+var character
+func _init(parent):
+	character = parent
 
 func main(delta):
-	self.movement.main(delta)
+	var movement = movement_factory(self.character)
+	movement.main(delta)
