@@ -2,24 +2,30 @@ extends Node
 
 const SPEED = 100 * 50
 
+
+
 class_name WallMovement
 
 var character
 func _init(parent):
 	character = parent
-	
+
 func main(delta):
-	detach(delta)
-	climb()
+	climb(delta)
 	self.character.move_and_slide(Player.motion, Vector2.UP)
 
-func climb():
+func climb(delta):
 	Player.motion.y = 0
-
-func detach(delta):
 	if (Player.state.direction == Enums.Direction.LEFT):
-		Player.motion.x = -SPEED * delta
+		Player.motion.y = SPEED * delta * self.reverse_multiplier()
 	elif (Player.state.direction == Enums.Direction.RIGHT):
-		Player.motion.x = SPEED * delta
-	else:
-		Player.motion.x = 0
+		Player.motion.y = -SPEED * delta * self.reverse_multiplier()
+
+func reverse_multiplier():
+	for i in range(self.character.get_slide_count()):
+		var collision = self.character.get_slide_collision(i)
+		if collision.normal.x > 0:
+			return -1
+		elif collision.normal.x < 0:
+			return 1
+	return 1
