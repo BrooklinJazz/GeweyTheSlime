@@ -11,6 +11,7 @@ func _init(parent):
 	character = parent
 
 func main(delta):
+	self.character.rotation_degrees = 270 * self.reverse_multiplier()
 	climb(delta)
 	self.character.move_and_slide(Player.motion, Vector2.UP)
 

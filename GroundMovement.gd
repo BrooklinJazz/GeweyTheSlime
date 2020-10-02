@@ -5,14 +5,14 @@ const GRIP_SPEED = 100 * 50
 const WALK_SPEED = 200 * 50
 const GRAVITY = 400
 const JUMP_FORCE = 1000 * 15
-
 class_name GroundMovement
-
 var character
 func _init(parent):
 	character = parent
 	
 func main(delta):
+	if (self.character.is_on_floor()):
+		self.character.rotation_degrees = 0
 	gravity(delta)
 	walk(delta)
 	jump(delta)

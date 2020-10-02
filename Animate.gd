@@ -4,16 +4,22 @@ class_name PlayerAnimate
 
 var body
 var legs
+var sprite
 
-func _init(Body, Legs):
+func _init(Body, Legs, Sprite):
 	body = Body
 	legs = Legs
+	sprite = Sprite
 	
 func main():
 	self.set_facing_direction()
 	self.play_current_animation()
 	
 func set_facing_direction():
+	if (Player.state.airborn == Enums.Airborn.ON_CEILING):
+		self.sprite.rotation_degrees = 180
+	else:
+		self.sprite.rotation_degrees = 0
 	if (Player.state.direction == Enums.Direction.LEFT):
 		self.body.flip_h = true
 	elif (Player.state.direction == Enums.Direction.RIGHT):

@@ -20,3 +20,4 @@ func climb(delta):
 		Player.motion.x = SPEED * delta
 	else:
 		Player.motion.x = 0
+
