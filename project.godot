@@ -1,0 +1,87 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "Node",
+"class": "CeilingMovement",
+"language": "GDScript",
+"path": "res://CeilingMovement.gd"
+}, {
+"base": "Node",
+"class": "GroundMovement",
+"language": "GDScript",
+"path": "res://GroundMovement.gd"
+}, {
+"base": "Node",
+"class": "PlayerAnimate",
+"language": "GDScript",
+"path": "res://Animate.gd"
+}, {
+"base": "Node",
+"class": "PlayerPhysics",
+"language": "GDScript",
+"path": "res://Physics.gd"
+}, {
+"base": "Node",
+"class": "PlayerStateMachine",
+"language": "GDScript",
+"path": "res://StateMachine.gd"
+}, {
+"base": "Node",
+"class": "WallMovement",
+"language": "GDScript",
+"path": "res://WallMovement.gd"
+} ]
+_global_script_class_icons={
+"CeilingMovement": "",
+"GroundMovement": "",
+"PlayerAnimate": "",
+"PlayerPhysics": "",
+"PlayerStateMachine": "",
+"WallMovement": ""
+}
+
+[application]
+
+config/name="spritedemo"
+run/main_scene="res://World.tscn"
+config/icon="res://icon.png"
+
+[autoload]
+
+Player="*res://PlayerVariables.gd"
+Enums="*res://Enums.gd"
+
+[input]
+
+left={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":65,"unicode":0,"echo":false,"script":null)
+ ]
+}
+right={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":68,"unicode":0,"echo":false,"script":null)
+ ]
+}
+jump={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":87,"unicode":0,"echo":false,"script":null)
+ ]
+}
+grip={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777237,"unicode":0,"echo":false,"script":null)
+ ]
+}
+
+[rendering]
+
+environment/default_environment="res://default_env.tres"
