@@ -17,145 +17,145 @@
 [ext_resource path="res://WallMovement.gd" type="Script" id=15]
 [ext_resource path="res://CeilingMovement.gd" type="Script" id=16]
 
-[sub_resource type="AtlasTexture" id=2]
+[sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 1 )
 region = Rect2( 0, 0, 28, 4 )
 
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 0, 28, 4 )
+
 [sub_resource type="AtlasTexture" id=3]
-atlas = ExtResource( 1 )
+atlas = ExtResource( 4 )
 region = Rect2( 28, 0, 28, 4 )
 
 [sub_resource type="AtlasTexture" id=4]
-atlas = ExtResource( 1 )
+atlas = ExtResource( 4 )
 region = Rect2( 56, 0, 28, 4 )
 
 [sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 1 )
-region = Rect2( 84, 0, 28, 4 )
+region = Rect2( 28, 0, 28, 4 )
 
 [sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 1 )
-region = Rect2( 112, 0, 28, 4 )
+region = Rect2( 56, 0, 28, 4 )
 
 [sub_resource type="AtlasTexture" id=7]
 atlas = ExtResource( 1 )
-region = Rect2( 140, 0, 28, 4 )
+region = Rect2( 84, 0, 28, 4 )
 
 [sub_resource type="AtlasTexture" id=8]
 atlas = ExtResource( 1 )
-region = Rect2( 168, 0, 28, 4 )
+region = Rect2( 112, 0, 28, 4 )
 
 [sub_resource type="AtlasTexture" id=9]
-atlas = ExtResource( 4 )
-region = Rect2( 0, 0, 28, 4 )
+atlas = ExtResource( 1 )
+region = Rect2( 140, 0, 28, 4 )
 
 [sub_resource type="AtlasTexture" id=10]
-atlas = ExtResource( 4 )
-region = Rect2( 28, 0, 28, 4 )
+atlas = ExtResource( 1 )
+region = Rect2( 168, 0, 28, 4 )
 
 [sub_resource type="AtlasTexture" id=11]
-atlas = ExtResource( 4 )
-region = Rect2( 56, 0, 28, 4 )
+atlas = ExtResource( 7 )
+region = Rect2( 0, 0, 28, 4 )
 
 [sub_resource type="AtlasTexture" id=12]
 atlas = ExtResource( 7 )
-region = Rect2( 0, 0, 28, 4 )
+region = Rect2( 28, 0, 28, 4 )
 
 [sub_resource type="AtlasTexture" id=13]
 atlas = ExtResource( 7 )
-region = Rect2( 28, 0, 28, 4 )
+region = Rect2( 56, 0, 28, 4 )
 
 [sub_resource type="AtlasTexture" id=14]
 atlas = ExtResource( 7 )
-region = Rect2( 56, 0, 28, 4 )
+region = Rect2( 84, 0, 28, 4 )
 
 [sub_resource type="AtlasTexture" id=15]
 atlas = ExtResource( 7 )
-region = Rect2( 84, 0, 28, 4 )
+region = Rect2( 112, 0, 28, 4 )
 
 [sub_resource type="AtlasTexture" id=16]
 atlas = ExtResource( 7 )
-region = Rect2( 112, 0, 28, 4 )
+region = Rect2( 140, 0, 28, 4 )
 
 [sub_resource type="AtlasTexture" id=17]
 atlas = ExtResource( 7 )
-region = Rect2( 140, 0, 28, 4 )
-
-[sub_resource type="AtlasTexture" id=18]
-atlas = ExtResource( 7 )
 region = Rect2( 168, 0, 28, 4 )
 
-[sub_resource type="SpriteFrames" id=19]
+[sub_resource type="SpriteFrames" id=18]
 animations = [ {
-"frames": [ SubResource( 2 ) ],
+"frames": [ SubResource( 1 ) ],
 "loop": false,
 "name": "idle",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
-"loop": true,
-"name": "walk",
-"speed": 24.0
-}, {
-"frames": [ SubResource( 9 ), SubResource( 10 ), SubResource( 11 ) ],
+"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ],
 "loop": false,
 "name": "charge_jump",
 "speed": 12.0
 }, {
-"frames": [ SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ) ],
+"frames": [ SubResource( 1 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ) ],
+"loop": true,
+"name": "walk",
+"speed": 24.0
+}, {
+"frames": [ SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ) ],
 "loop": true,
 "name": "grip",
 "speed": 12.0
 }, {
-"frames": [ SubResource( 12 ) ],
+"frames": [ SubResource( 11 ) ],
 "loop": true,
 "name": "grip_idle",
 "speed": 5.0
 } ]
 
-[sub_resource type="AtlasTexture" id=20]
+[sub_resource type="AtlasTexture" id=19]
 atlas = ExtResource( 5 )
 region = Rect2( 0, 0, 28, 11 )
+
+[sub_resource type="AtlasTexture" id=20]
+atlas = ExtResource( 5 )
+region = Rect2( 28, 0, 28, 11 )
 
 [sub_resource type="AtlasTexture" id=21]
 atlas = ExtResource( 5 )
-region = Rect2( 28, 0, 28, 11 )
-
-[sub_resource type="AtlasTexture" id=22]
-atlas = ExtResource( 5 )
 region = Rect2( 56, 0, 28, 11 )
 
-[sub_resource type="AtlasTexture" id=23]
+[sub_resource type="AtlasTexture" id=22]
 atlas = ExtResource( 6 )
 region = Rect2( 0, 0, 28, 11 )
 
-[sub_resource type="AtlasTexture" id=24]
+[sub_resource type="AtlasTexture" id=23]
 atlas = ExtResource( 6 )
 region = Rect2( 28, 0, 28, 11 )
 
-[sub_resource type="AtlasTexture" id=25]
+[sub_resource type="AtlasTexture" id=24]
 atlas = ExtResource( 6 )
 region = Rect2( 56, 0, 28, 11 )
 
-[sub_resource type="SpriteFrames" id=26]
+[sub_resource type="SpriteFrames" id=25]
 animations = [ {
 "frames": [ ExtResource( 2 ) ],
 "loop": true,
 "name": "default",
 "speed": 1.0
 }, {
-"frames": [ SubResource( 20 ), SubResource( 21 ), SubResource( 22 ) ],
+"frames": [ SubResource( 19 ), SubResource( 20 ), SubResource( 21 ) ],
 "loop": false,
 "name": "charge_jump",
 "speed": 12.0
 }, {
-"frames": [ SubResource( 23 ), SubResource( 24 ), SubResource( 25 ) ],
+"frames": [ SubResource( 22 ), SubResource( 23 ), SubResource( 24 ) ],
 "loop": false,
 "name": "grip",
 "speed": 12.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=26]
 extents = Vector2( 13.9238, 7.51817 )
 
 [sub_resource type="RectangleShape2D" id=27]
@@ -170,7 +170,7 @@ script = ExtResource( 3 )
 
 [node name="Legs" type="AnimatedSprite" parent="Character/Sprites"]
 position = Vector2( -2.84217e-14, 5.13232 )
-frames = SubResource( 19 )
+frames = SubResource( 18 )
 animation = "grip_idle"
 playing = true
 __meta__ = {
@@ -179,7 +179,7 @@ __meta__ = {
 
 [node name="Body" type="AnimatedSprite" parent="Character/Sprites"]
 position = Vector2( 0, -2.86112 )
-frames = SubResource( 26 )
+frames = SubResource( 25 )
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -187,11 +187,12 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Character"]
 position = Vector2( 0.0294991, -0.493613 )
-shape = SubResource( 1 )
+shape = SubResource( 26 )
 
 [node name="Camera2D" type="Camera2D" parent="Character"]
 current = true
 zoom = Vector2( 0.4, 0.4 )
+smoothing_enabled = true
 
 [node name="StateMachine" type="Node" parent="Character"]
 script = ExtResource( 9 )

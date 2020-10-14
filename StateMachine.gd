@@ -39,9 +39,12 @@ func airborn_factory():
 		return Enums.Airborn.JUMPED
 	elif (self.character.is_on_ceiling()):
 		return Enums.Airborn.ON_CEILING
-	elif (self.character.is_on_wall()):
-		return Enums.Airborn.ON_WALL
+	
+	# TODO - touching both at once causes fast switching between states
 	elif (self.character.is_on_floor()):
 		return Enums.Airborn.ON_FLOOR
+	elif (self.character.is_on_wall()):
+		return Enums.Airborn.ON_WALL
+
 	else:
 		return Enums.Airborn.IDLE

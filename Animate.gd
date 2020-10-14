@@ -21,9 +21,16 @@ func set_facing_direction():
 	else:
 		self.sprite.rotation_degrees = 0
 	if (Player.state.direction == Enums.Direction.LEFT):
-		self.body.flip_h = true
+		if (Player.state.airborn == Enums.Airborn.ON_CEILING):
+			self.body.flip_h = false
+		else:
+			self.body.flip_h = true
+			
 	elif (Player.state.direction == Enums.Direction.RIGHT):
-		self.body.flip_h = false
+		if (Player.state.airborn == Enums.Airborn.ON_CEILING):
+			self.body.flip_h = true
+		else:
+			self.body.flip_h = false
 
 func play_current_animation():
 	match Player.state.movement:

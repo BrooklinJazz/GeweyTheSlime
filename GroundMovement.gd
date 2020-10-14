@@ -11,8 +11,9 @@ func _init(parent):
 	character = parent
 	
 func main(delta):
-	if (self.character.is_on_floor()):
-		self.character.rotation_degrees = 0
+	if character.rotation_degrees != 0:
+		character.rotation_degrees = 0
+		character.global_position += Vector2(0,7)
 	gravity(delta)
 	walk(delta)
 	jump(delta)
