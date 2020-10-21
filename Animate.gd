@@ -6,31 +6,27 @@ var body
 var legs
 var sprite
 
-func _init(Body, Legs, Sprite):
+func _init(Body, Legs):
 	body = Body
 	legs = Legs
-	sprite = Sprite
 	
 func main():
 	self.set_facing_direction()
 	self.play_current_animation()
 	
 func set_facing_direction():
-#	if (Player.state.airborne == Enums.Airborne.ON_CEILING):
-#		self.sprite.rotation_degrees = 180
-#	else:
-#		self.sprite.rotation_degrees = 0
-	if (Player.state.direction == Enums.Direction.LEFT):
-		if (Player.state.airborne == Enums.Airborne.ON_CEILING):
-			self.body.flip_h = false
-		else:
-			self.body.flip_h = true
-			
-	elif (Player.state.direction == Enums.Direction.RIGHT):
-		if (Player.state.airborne == Enums.Airborne.ON_CEILING):
-			self.body.flip_h = true
-		else:
-			self.body.flip_h = false
+	self.body.flip_h = self.get_flip_h()
+
+func get_flip_h() -> bool:
+	var flip_h = self.body.flip_h
+	match Player.state.direction:
+		Enums.Direction.LEFT:
+			flip_h = true
+		Enums.Direction.RIGHT:
+			flip_h = false
+	if(Player.state.airborne == Enums.Airborne.ON_CEILING):
+		flip_h = not flip_h
+	return flip_h
 
 func play_current_animation():
 	match Player.state.movement:

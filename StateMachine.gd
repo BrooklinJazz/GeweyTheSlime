@@ -7,8 +7,8 @@ var character
 func _init(parent):
 	character = parent
 	
-func main():
-	Player.state = {
+func get_state():
+	return {
 		"airborne": airborne_factory(),
 		"direction": direction_factory(),
 		"movement": movement_factory()
