@@ -11,9 +11,14 @@ func movement_factory(character):
 class_name PlayerPhysics
 
 var character
+
 func _init(parent):
 	character = parent
 
 func main(delta):
 	var movement = movement_factory(self.character)
+	# TODO - return motion instead
 	movement.main(delta)
+	var motion = Player.motion #+ Hook.motion
+	self.character.move_and_slide(motion, Vector2.UP)
+	

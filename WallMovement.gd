@@ -15,7 +15,7 @@ func main(delta):
 		character.rotation_degrees = 90 * reverse_multiplier()
 		character.global_position += Vector2(-7, 0) * reverse_multiplier()
 	climb(delta)
-	self.character.move_and_slide(Player.motion, Vector2.UP)
+
 
 func climb(delta):
 	Player.motion.y = 0

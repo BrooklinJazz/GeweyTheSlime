@@ -1,11 +1,15 @@
 extends Node
 
-const SPEED = 100
-const GRIP_SPEED = 100 * 50
-const WALK_SPEED = 200 * 50
+#const SPEED = 10
+#const ACCELERATION = 50
+const GRIP_SPEED = 200
+const WALK_SPEED = 400
 const GRAVITY = 400
 const JUMP_FORCE = 1000 * 15
+
+
 class_name GroundMovement
+
 var character
 func _init(parent):
 	character = parent
@@ -17,7 +21,7 @@ func main(delta):
 	gravity(delta)
 	walk(delta)
 	jump(delta)
-	self.character.move_and_slide(Player.motion, Vector2.UP)
+
 	
 func get_speed():
 	if (Player.state.movement == Enums.Movement.GRIP):
@@ -28,12 +32,19 @@ func get_speed():
 func walk(delta):
 	var speed = get_speed()
 	if (Player.state.direction == Enums.Direction.LEFT):
-		Player.motion.x = -speed * delta
+		Player.motion.x += -speed * delta
+		
 	elif (Player.state.direction == Enums.Direction.RIGHT):
-		Player.motion.x = speed * delta
+		Player.motion.x += speed * delta
 	else:
-		Player.motion.x = 0
+		Player.motion.x *= 0.95
+	Player.motion.x *= 0.97
 
+#		Current speed
+#		Top speed
+#		Accel
+
+		
 func gravity(delta):
 	if (Player.state.airborn == Enums.Airborn.ON_FLOOR):
 		Player.motion.y = 0
@@ -42,4 +53,4 @@ func gravity(delta):
 
 func jump(delta):
 	if (Player.state.airborn == Enums.Airborn.JUMPED):
-		Player.motion.y -= JUMP_FORCE * delta
+		Player.motion.y -= JUMP_FORCE * delta 
