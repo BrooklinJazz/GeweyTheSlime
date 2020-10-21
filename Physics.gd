@@ -11,7 +11,6 @@ func movement_factory(character):
 class_name PlayerPhysics
 
 var character
-
 func _init(parent):
 	character = parent
 

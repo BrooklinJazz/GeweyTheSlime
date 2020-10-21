@@ -45,6 +45,5 @@ func airborn_factory():
 		return Enums.Airborn.ON_FLOOR
 	elif (self.character.is_on_wall()):
 		return Enums.Airborn.ON_WALL
-
 	else:
 		return Enums.Airborn.IDLE
