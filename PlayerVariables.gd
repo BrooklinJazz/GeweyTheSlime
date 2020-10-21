@@ -12,7 +12,7 @@ enum Movement {
 	JUMP_CHARGE
 }
 
-enum Airborn {
+enum Airborne {
 	RISING,
 	FALLING,
 	ON_FLOOR,
@@ -25,7 +25,7 @@ enum Airborn {
 export var state = {
 	"movement": Movement.WALK,
 	"direction": Direction.CENTER,
-	"airborn": Airborn.FALLING
+	"airborne": Airborne.FALLING
 }
 
 var motion = Vector2()

@@ -10,7 +10,7 @@ polygon = PoolVector2Array( 576, -128, 832, -128, 832, 320, -384, 320, -384, 256
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
-polygon = PoolVector2Array( -384, 256, 576, 256, 768, 256, 768, -64, 576, -64, 576, -128, 832, -128, 832, 320, -384, 320 )
+polygon = PoolVector2Array( -384, 256, 576, 256, 768, 256, 769.433, 174.358, 581.342, 175.772, 576, -128, 832, -128, 832, 320, -384, 320 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 208, 256 )

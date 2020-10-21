@@ -1,6 +1,5 @@
 extends Node
 
-
 # Called when the node enters the scene tree for the first time.
 class_name PlayerStateMachine
 
@@ -10,7 +9,7 @@ func _init(parent):
 	
 func main():
 	Player.state = {
-		"airborn": airborn_factory(),
+		"airborne": airborne_factory(),
 		"direction": direction_factory(),
 		"movement": movement_factory()
 	}
@@ -33,17 +32,17 @@ func movement_factory():
 	else:
 		return Enums.Movement.WALK
 		
-func airborn_factory():
+func airborne_factory():
 #	TODO - expand this factory to introduce all states
 	if (Input.is_action_just_released("jump") and self.character.is_on_floor()):
-		return Enums.Airborn.JUMPED
+		return Enums.Airborne.JUMPED
 	elif (self.character.is_on_ceiling()):
-		return Enums.Airborn.ON_CEILING
+		return Enums.Airborne.ON_CEILING
 	
 	# TODO - touching both at once causes fast switching between states
 	elif (self.character.is_on_floor()):
-		return Enums.Airborn.ON_FLOOR
+		return Enums.Airborne.ON_FLOOR
 	elif (self.character.is_on_wall()):
-		return Enums.Airborn.ON_WALL
+		return Enums.Airborne.ON_WALL
 	else:
-		return Enums.Airborn.IDLE
+		return Enums.Airborne.IDLE

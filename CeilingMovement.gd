@@ -1,6 +1,6 @@
 extends Node
 
-const SPEED = 100 * 50
+const SPEED = 5000
 
 class_name CeilingMovement
 
@@ -8,18 +8,16 @@ var character
 func _init(parent):
 	character = parent
 
-func main(delta):
+func get_motion(delta: float) -> Vector2:
 	if character.rotation_degrees != 180:
 		character.rotation_degrees = 180
 		character.global_position += Vector2(0, -2)
-	climb(delta)
+	return Vector2(climb(delta), -1)
 
-func climb(delta):
-	Player.motion.y = -1
+func climb(delta: float) -> float:
 	if (Player.state.direction == Enums.Direction.LEFT):
-		Player.motion.x = -SPEED * delta
+		return -SPEED * delta
 	elif (Player.state.direction == Enums.Direction.RIGHT):
-		Player.motion.x = SPEED * delta
-	else:
-		Player.motion.x = 0
+		return SPEED * delta
+	return 0.0
 

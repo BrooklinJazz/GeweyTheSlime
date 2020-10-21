@@ -11,5 +11,9 @@ func _ready():
 
 func _physics_process(delta):
 	StateMachine.main()
-	Physics.main(delta)
+	self.update_player_motion(delta)
 	Animate.main()
+
+func update_player_motion(delta: float):
+	Player.motion = Physics.get_motion(delta)
+	move_and_slide(Player.motion, Vector2.UP)

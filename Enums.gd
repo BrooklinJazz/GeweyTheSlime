@@ -12,7 +12,7 @@ enum Movement {
 	JUMP_CHARGE
 }
 
-enum Airborn {
+enum Airborne {
 	RISING,
 	FALLING,
 	ON_FLOOR,
