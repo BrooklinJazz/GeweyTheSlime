@@ -4,30 +4,29 @@ class_name PlayerAnimate
 
 var body
 var legs
-var sprite
 
 func _init(Body, Legs):
 	body = Body
 	legs = Legs
 	
-func main():
+func animate():
 	self.set_facing_direction()
 	self.play_current_animation()
 	
 func set_facing_direction():
-	self.body.flip_h = self.get_flip_h()
+	self.body.flip_h = get_direction()
 
-func get_flip_h() -> bool:
-	var flip_h = self.body.flip_h
+func get_direction() -> bool:
+	var shouldFlip = self.body.flip_h
 	match Player.state.direction:
 		Enums.Direction.LEFT:
-			flip_h = true
+			shouldFlip = true
 		Enums.Direction.RIGHT:
-			flip_h = false
+			shouldFlip = false
 	if(Player.state.airborne == Enums.Airborne.ON_CEILING):
-		flip_h = not flip_h
-	return flip_h
-
+		return not shouldFlip
+	return shouldFlip
+	
 func play_current_animation():
 	match Player.state.movement:
 		Enums.Movement.WALK:
@@ -42,19 +41,15 @@ func play_current_animation():
 			return
 #	set animation defaults to start playing for some reason
 	self.legs.stop()
-	self.iterate_animation()
+	self.legs.set_frame(get_next_frame())
 	
-func iterate_animation():
+func get_next_frame() -> int:
 	#	TODO - we probably have to make this work with delta to make frames match Enums.Movement
 	var numberOfFrames = self.legs.get_sprite_frames().get_frame_count(self.legs.get_animation())
+	var frameIndex = self.legs.get_frame()
 	match Player.state.direction:
-		Enums.Direction.CENTER:
-			pass
 		Enums.Direction.LEFT:
-			#	TODO - figure out how to improve logic
-			if (self.legs.get_frame() == 0):
-				self.legs.set_frame(7)
-			else:
-				self.legs.set_frame((self.legs.get_frame() - 1))		
+			frameIndex = posmod(frameIndex - 1, numberOfFrames)
 		Enums.Direction.RIGHT:
-			self.legs.set_frame((self.legs.get_frame() + 1) % numberOfFrames)
+			frameIndex = posmod(frameIndex + 1, numberOfFrames)
+	return frameIndex
