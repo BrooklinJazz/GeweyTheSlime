@@ -18,12 +18,12 @@ func set_facing_direction():
 
 func get_direction(flip: bool):
 	var shouldFlip = flip
-	match Player.state.direction:
+	match Player.state.direction.x:
 		Enums.Direction.LEFT:
 			shouldFlip = true
 		Enums.Direction.RIGHT:
 			shouldFlip = false
-	if(Player.state.airborne == Enums.Airborne.ON_CEILING and Player.state.direction != Enums.Direction.CENTER):
+	if(Player.state.airborne == Enums.Airborne.ON_CEILING and Player.state.direction.x != Enums.Direction.CENTER):
 		shouldFlip = not shouldFlip
 	return shouldFlip
 	
@@ -47,7 +47,7 @@ func get_next_frame() -> int:
 	#	TODO - we probably have to make this work with delta to make frames match Enums.Movement
 	var numberOfFrames = self.legs.get_sprite_frames().get_frame_count(self.legs.get_animation())
 	var frameIndex = self.legs.get_frame()
-	match Player.state.direction:
+	match Player.state.direction.x:
 		Enums.Direction.LEFT:
 			frameIndex = posmod(frameIndex - 1, numberOfFrames)
 		Enums.Direction.RIGHT:

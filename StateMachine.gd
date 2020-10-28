@@ -10,11 +10,14 @@ func _init(parent):
 func get_state():
 	return {
 		"airborne": airborne_factory(),
-		"direction": direction_factory(),
+		"direction": {
+			"x": x_direction_factory(),
+#			"y": y_direction_factory()
+		},
 		"movement": movement_factory()
 	}
 	
-func direction_factory():
+func x_direction_factory():
 	if (Input.is_action_pressed("right") and Input.is_action_pressed("left")):
 		return Enums.Direction.CENTER
 	elif (Input.is_action_pressed("left")):

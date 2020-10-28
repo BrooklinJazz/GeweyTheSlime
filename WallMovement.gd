@@ -17,9 +17,9 @@ func get_motion(delta: float) -> Vector2:
 
 func climb(delta: float) -> float:
 	var motion = 0.0
-	if (Player.state.direction == Enums.Direction.LEFT):
+	if (Player.state.direction.x == Enums.Direction.LEFT):
 		motion = -SPEED * delta * self.reverse_multiplier()
-	elif (Player.state.direction == Enums.Direction.RIGHT):
+	elif (Player.state.direction.x == Enums.Direction.RIGHT):
 		motion = SPEED * delta * self.reverse_multiplier()
 	return motion
 
