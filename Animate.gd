@@ -18,12 +18,11 @@ func set_facing_direction():
 
 func get_direction(flip: bool):
 	var shouldFlip = flip
-	match Player.state.direction.x:
-		Enums.Direction.LEFT:
-			shouldFlip = true
-		Enums.Direction.RIGHT:
-			shouldFlip = false
-	if(Player.state.airborne == Enums.Airborne.ON_CEILING and Player.state.direction.x != Enums.Direction.CENTER):
+	if (Player.state.direction.x.left):
+		shouldFlip = true
+	elif Player.state.direction.x.right:
+		shouldFlip = false
+	if(Player.state.airborne == Enums.Airborne.ON_CEILING and !Player.state.direction.x.center):
 		shouldFlip = not shouldFlip
 	return shouldFlip
 	
@@ -47,15 +46,8 @@ func get_next_frame() -> int:
 	#	TODO - we probably have to make this work with delta to make frames match Enums.Movement
 	var numberOfFrames = self.legs.get_sprite_frames().get_frame_count(self.legs.get_animation())
 	var frameIndex = self.legs.get_frame()
-	match Player.state.direction.x:
-		Enums.Direction.LEFT:
-			frameIndex = posmod(frameIndex - 1, numberOfFrames)
-		Enums.Direction.RIGHT:
-			frameIndex = posmod(frameIndex + 1, numberOfFrames)
-			
-	match Player.state.direction.y:
-		Enums.Direction.DOWN:
-			frameIndex = posmod(frameIndex - 1, numberOfFrames)
-		Enums.Direction.UP:
-			frameIndex = posmod(frameIndex + 1, numberOfFrames)
+	if (Player.state.direction.x.left or Player.state.direction.y.down):
+		frameIndex = posmod(frameIndex - 1, numberOfFrames)
+	elif (Player.state.direction.x.right or Player.state.direction.y.up):
+		frameIndex = posmod(frameIndex + 1, numberOfFrames)
 	return frameIndex

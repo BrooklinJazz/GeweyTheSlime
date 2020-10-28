@@ -18,31 +18,40 @@ func get_state():
 	}
 	
 func x_direction_factory():
-	var direction = {
-		"right": false,
-		"left": false,
-		"center": false
-	}
+	var right = false
+	var center = false
+	var left = false
 	if (Input.is_action_pressed("right") and Input.is_action_pressed("left")):
-		direction.center = true
+		center = true
 	elif (Input.is_action_pressed("left")):
-		direction.left = true
+		left = true
 	elif (Input.is_action_pressed("right")):
-		direction.right = true
+		right = true
 	else:
-		direction.center = true
-	return direction
+		center = true
+	return {
+		"right": right,
+		"center": center,
+		"left": left
+	}
 
 func y_direction_factory():
+	var up = false
+	var down = false
+	var center = false
 	if (Input.is_action_pressed("up") and Input.is_action_pressed("down")):
-		return Enums.Direction.CENTER
+		center = true
 	elif (Input.is_action_pressed("down")):
-		return Enums.Direction.DOWN
+		down = true
 	elif (Input.is_action_pressed("up")):
-		return Enums.Direction.UP
+		up = true
 	else:
-		return Enums.Direction.CENTER
-
+		center = true
+	return {
+		"up": up,
+		"center": center,
+		"down": down
+	}
 
 func movement_factory():
 	if (Input.is_action_pressed("jump")):

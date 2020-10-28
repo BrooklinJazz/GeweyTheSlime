@@ -29,13 +29,12 @@ func get_speed() -> int:
 func walk(delta: float) -> float:
 	var speed = get_speed()
 	var motion = Player.motion.x
-	match Player.state.direction.x:
-		Enums.Direction.LEFT:
-			motion += (-speed * delta)
-		Enums.Direction.RIGHT:
-			motion += (speed * delta)
-		_:
-			motion *= 0.95
+	if (Player.state.direction.x.left):
+		motion += (-speed * delta)
+	elif Player.state.direction.x.right:
+		motion += (speed * delta)
+	else:
+		motion *= 0.95
 	return motion * 0.97
 
 func jump(delta: float) -> float:

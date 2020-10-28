@@ -17,9 +17,9 @@ func get_motion(delta: float) -> Vector2:
 
 func climb() -> float:
 	var motion = 0.0
-	if (Player.state.direction.y == Enums.Direction.UP):
+	if (Player.state.direction.y.up):
 		motion = -SPEED
-	elif (Player.state.direction.y == Enums.Direction.DOWN):
+	elif (Player.state.direction.y.down):
 		motion = SPEED
 	return motion
 

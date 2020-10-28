@@ -1,13 +1,5 @@
 extends Node
 
-enum Direction {
-	UP,
-	DOWN,
-	LEFT,
-	RIGHT,
-	CENTER,
-}
-
 enum Movement {
 	WALK,
 	GRIP,
