@@ -14,17 +14,17 @@ func animate():
 	self.play_current_animation()
 	
 func set_facing_direction():
-	self.body.flip_h = get_direction()
+	self.body.flip_h = get_direction(self.body.flip_h)
 
-func get_direction() -> bool:
-	var shouldFlip = self.body.flip_h
+func get_direction(flip: bool):
+	var shouldFlip = flip
 	match Player.state.direction:
 		Enums.Direction.LEFT:
 			shouldFlip = true
 		Enums.Direction.RIGHT:
 			shouldFlip = false
-	if(Player.state.airborne == Enums.Airborne.ON_CEILING):
-		return not shouldFlip
+	if(Player.state.airborne == Enums.Airborne.ON_CEILING and Player.state.direction != Enums.Direction.CENTER):
+		shouldFlip = not shouldFlip
 	return shouldFlip
 	
 func play_current_animation():
