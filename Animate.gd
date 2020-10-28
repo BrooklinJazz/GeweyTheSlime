@@ -52,4 +52,10 @@ func get_next_frame() -> int:
 			frameIndex = posmod(frameIndex - 1, numberOfFrames)
 		Enums.Direction.RIGHT:
 			frameIndex = posmod(frameIndex + 1, numberOfFrames)
+			
+	match Player.state.direction.y:
+		Enums.Direction.DOWN:
+			frameIndex = posmod(frameIndex - 1, numberOfFrames)
+		Enums.Direction.UP:
+			frameIndex = posmod(frameIndex + 1, numberOfFrames)
 	return frameIndex

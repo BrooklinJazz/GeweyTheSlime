@@ -12,7 +12,7 @@ func get_state():
 		"airborne": airborne_factory(),
 		"direction": {
 			"x": x_direction_factory(),
-#			"y": y_direction_factory()
+			"y": y_direction_factory()
 		},
 		"movement": movement_factory()
 	}
@@ -26,6 +26,17 @@ func x_direction_factory():
 		return Enums.Direction.RIGHT
 	else:
 		return Enums.Direction.CENTER
+
+func y_direction_factory():
+	if (Input.is_action_pressed("up") and Input.is_action_pressed("down")):
+		return Enums.Direction.CENTER
+	elif (Input.is_action_pressed("down")):
+		return Enums.Direction.DOWN
+	elif (Input.is_action_pressed("up")):
+		return Enums.Direction.UP
+	else:
+		return Enums.Direction.CENTER
+
 
 func movement_factory():
 	if (Input.is_action_pressed("jump")):

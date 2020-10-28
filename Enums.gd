@@ -1,9 +1,11 @@
 extends Node
 
 enum Direction {
+	UP,
+	DOWN,
 	LEFT,
 	RIGHT,
-	CENTER
+	CENTER,
 }
 
 enum Movement {

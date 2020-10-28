@@ -1,6 +1,6 @@
 extends Node
 
-const SPEED = 100 * 50
+const SPEED = 100
 
 class_name WallMovement
 
@@ -12,15 +12,15 @@ func get_motion(delta: float) -> Vector2:
 	if character.rotation_degrees != 90 * reverse_multiplier():
 		character.rotation_degrees = 90 * reverse_multiplier()
 		character.global_position += Vector2(-7, 0) * reverse_multiplier()
-	return Vector2(Player.motion.x, climb(delta))
+	return Vector2(Player.motion.x, climb())
 
 
-func climb(delta: float) -> float:
+func climb() -> float:
 	var motion = 0.0
-	if (Player.state.direction.x == Enums.Direction.LEFT):
-		motion = -SPEED * delta * self.reverse_multiplier()
-	elif (Player.state.direction.x == Enums.Direction.RIGHT):
-		motion = SPEED * delta * self.reverse_multiplier()
+	if (Player.state.direction.y == Enums.Direction.UP):
+		motion = -SPEED
+	elif (Player.state.direction.y == Enums.Direction.DOWN):
+		motion = SPEED
 	return motion
 
 func reverse_multiplier() -> int:
