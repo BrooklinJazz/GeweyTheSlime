@@ -63,15 +63,28 @@ func movement_factory():
 		
 func airborne_factory():
 #	TODO - expand this factory to introduce all states
+	var jumped = false
+	var on_ceiling = false
+	var on_floor = false
+	var on_wall = false
+	var idle = false
+
 	if (Input.is_action_just_released("jump") and self.character.is_on_floor()):
-		return Enums.Airborne.JUMPED
+		jumped = true
 	elif (self.character.is_on_ceiling()):
-		return Enums.Airborne.ON_CEILING
-	
+		on_ceiling = true
 	# TODO - touching both at once causes fast switching between states
 	elif (self.character.is_on_floor()):
-		return Enums.Airborne.ON_FLOOR
+		on_floor = true
 	elif (self.character.is_on_wall()):
-		return Enums.Airborne.ON_WALL
+		on_wall = true
 	else:
-		return Enums.Airborne.IDLE
+		idle = true
+		
+	return {
+		"jumped": jumped,
+		"on_ceiling": on_ceiling,
+		"on_floor": on_floor,
+		"on_wall": on_wall,
+		"idle": idle
+	}

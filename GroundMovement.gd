@@ -38,8 +38,8 @@ func walk(delta: float) -> float:
 	return motion * 0.97
 
 func jump(delta: float) -> float:
-	if (Player.state.airborne == Enums.Airborne.JUMPED):
+	if (Player.state.airborne.jumped):
 		return JUMP_FORCE
-	if (Player.state.airborne == Enums.Airborne.ON_FLOOR):
+	if (Player.state.airborne.on_floor):
 		return Player.motion.y
 	return Player.motion.y + (GRAVITY * delta)

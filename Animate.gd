@@ -22,7 +22,7 @@ func get_direction(flip: bool):
 		shouldFlip = true
 	elif Player.state.direction.x.right:
 		shouldFlip = false
-	if(Player.state.airborne == Enums.Airborne.ON_CEILING and !Player.state.direction.x.center):
+	if(Player.state.airborne.on_ceiling and !Player.state.direction.x.center):
 		shouldFlip = not shouldFlip
 	return shouldFlip
 	
