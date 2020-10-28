@@ -18,14 +18,20 @@ func get_state():
 	}
 	
 func x_direction_factory():
+	var direction = {
+		"right": false,
+		"left": false,
+		"center": false
+	}
 	if (Input.is_action_pressed("right") and Input.is_action_pressed("left")):
-		return Enums.Direction.CENTER
+		direction.center = true
 	elif (Input.is_action_pressed("left")):
-		return Enums.Direction.LEFT
+		direction.left = true
 	elif (Input.is_action_pressed("right")):
-		return Enums.Direction.RIGHT
+		direction.right = true
 	else:
-		return Enums.Direction.CENTER
+		direction.center = true
+	return direction
 
 func y_direction_factory():
 	if (Input.is_action_pressed("up") and Input.is_action_pressed("down")):
