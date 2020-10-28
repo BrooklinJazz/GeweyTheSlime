@@ -22,7 +22,7 @@ func get_motion(delta: float) -> Vector2:
 
 
 func get_speed() -> int:
-	if (Player.state.movement == Enums.Movement.GRIP):
+	if (Player.state.movement.grip):
 		return GRIP_SPEED
 	return WALK_SPEED
 

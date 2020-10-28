@@ -54,12 +54,21 @@ func y_direction_factory():
 	}
 
 func movement_factory():
+	var charge_jump = false
+	var grip = false
+	var walk = false
 	if (Input.is_action_pressed("jump")):
-		return Enums.Movement.JUMP_CHARGE
+		charge_jump = true
 	elif (Input.is_action_pressed("grip")):
-		return Enums.Movement.GRIP
+		grip = true
 	else:
-		return Enums.Movement.WALK
+		walk = true
+
+	return {
+		"charge_jump": charge_jump,
+		"grip": grip,
+		"walk": walk
+	}
 		
 func airborne_factory():
 #	TODO - expand this factory to introduce all states
@@ -80,7 +89,7 @@ func airborne_factory():
 		on_wall = true
 	else:
 		idle = true
-		
+
 	return {
 		"jumped": jumped,
 		"on_ceiling": on_ceiling,

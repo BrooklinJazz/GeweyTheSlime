@@ -27,18 +27,17 @@ func get_direction(flip: bool):
 	return shouldFlip
 	
 func play_current_animation():
-	match Player.state.movement:
-		Enums.Movement.WALK:
-			self.body.set_animation("default")
-			self.legs.set_animation("walk")
-		Enums.Movement.GRIP:
-			self.body.set_animation("grip")
-			self.legs.set_animation("grip")
-		Enums.Movement.JUMP_CHARGE:
-			self.legs.play("charge_jump")
-			self.body.play("charge_jump")
-			return
-#	set animation defaults to start playing for some reason
+	if Player.state.movement.walk:
+		self.body.set_animation("default")
+		self.legs.set_animation("walk")
+	if Player.state.movement.grip:
+		self.body.set_animation("grip")
+		self.legs.set_animation("grip")
+	if Player.state.movement.charge_jump:
+		self.legs.play("charge_jump")
+		self.body.play("charge_jump")
+		return
+	# set animation defaults to start playing for some reason
 	self.legs.stop()
 	self.legs.set_frame(get_next_frame())
 	
