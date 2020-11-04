@@ -1,12 +1,12 @@
 [gd_scene load_steps=42 format=2]
 
-[ext_resource path="res://slime-legs-walk-Sheet.png" type="Texture" id=1]
-[ext_resource path="res://slime-body.png" type="Texture" id=2]
+[ext_resource path="res://sprites/slime-legs-walk-Sheet.png" type="Texture" id=1]
+[ext_resource path="res://sprites/slime-body.png" type="Texture" id=2]
 [ext_resource path="res://Character.gd" type="Script" id=3]
-[ext_resource path="res://slime-legs-jump-Sheet.png" type="Texture" id=4]
-[ext_resource path="res://slime-body-jump-Sheet.png" type="Texture" id=5]
-[ext_resource path="res://slime-body-grip-Sheet.png" type="Texture" id=6]
-[ext_resource path="res://slime-legs-grip-Sheet.png" type="Texture" id=7]
+[ext_resource path="res://sprites/slime-legs-jump-Sheet.png" type="Texture" id=4]
+[ext_resource path="res://sprites/slime-body-jump-Sheet.png" type="Texture" id=5]
+[ext_resource path="res://sprites/slime-body-grip-Sheet.png" type="Texture" id=6]
+[ext_resource path="res://sprites/slime-legs-grip-Sheet.png" type="Texture" id=7]
 [ext_resource path="res://StateMachine.gd" type="Script" id=9]
 [ext_resource path="res://Animate.gd" type="Script" id=10]
 [ext_resource path="res://Physics.gd" type="Script" id=12]
@@ -14,6 +14,7 @@
 [ext_resource path="res://GroundMovement.gd" type="Script" id=14]
 [ext_resource path="res://WallMovement.gd" type="Script" id=15]
 [ext_resource path="res://CeilingMovement.gd" type="Script" id=16]
+
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 1 )

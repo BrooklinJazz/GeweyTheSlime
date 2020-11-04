@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/slime-body-grip-Sheet.png-dd6216fcd84b3658e98b852f79fd6d4f.stex"
+path="res://.import/slime-body.png-f6842ae59ec1b69c7058125b1fb51c8d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://slime-body-grip-Sheet.png"
-dest_files=[ "res://.import/slime-body-grip-Sheet.png-dd6216fcd84b3658e98b852f79fd6d4f.stex" ]
+source_file="res://sprites/slime-body.png"
+dest_files=[ "res://.import/slime-body.png-f6842ae59ec1b69c7058125b1fb51c8d.stex" ]
 
 [params]
 
