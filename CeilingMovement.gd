@@ -11,7 +11,7 @@ func _init(parent):
 func get_motion(delta: float) -> Vector2:
 	if character.rotation_degrees != 180:
 		character.rotation_degrees = 180
-		character.global_position += Vector2(0, -2)
+		character.global_position += Vector2(0, -8)
 	return Vector2(climb(delta), -1)
 
 func climb(delta: float) -> float:

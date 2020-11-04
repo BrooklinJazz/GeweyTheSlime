@@ -78,17 +78,56 @@ func airborne_factory():
 	var on_wall = false
 	var idle = false
 
+	var previous = Player.state.airborne
+	if not previous:
+		previous = {
+			"jumped": jumped,
+			"on_ceiling": on_ceiling,
+			"on_floor": on_floor,
+			"on_wall": on_wall,
+			"idle": idle
+		}
+
+	# TODO: someone please help
 	if (Input.is_action_just_released("jump") and self.character.is_on_floor()):
 		jumped = true
-	elif (self.character.is_on_ceiling()):
-		on_ceiling = true
-	# TODO - touching both at once causes fast switching between states
-	elif (self.character.is_on_floor()):
-		on_floor = true
-	elif (self.character.is_on_wall()):
+
+	elif character.is_on_floor() and character.is_on_wall() and Player.state.direction.y.up:
 		on_wall = true
-	else:
-		idle = true
+
+	elif character.is_on_wall() and character.is_on_floor() and not Player.state.direction.x.center:
+		on_floor = true
+
+	elif character.is_on_wall() and character.is_on_ceiling() and not Player.state.direction.x.center:
+		on_ceiling = true
+
+	elif character.is_on_ceiling() and character.is_on_wall() and Player.state.direction.y.down:
+		on_wall = true
+
+	elif character.is_on_floor() and character.is_on_wall():
+		return previous
+
+	# for some reason is_on_ceiling() is not true when upside down in the corner?
+	# so two band-aids cover for this jank
+	elif character.is_on_wall() and character.is_on_ceiling():
+		return previous
+
+	# this is a band-aid on a band-aid
+	elif previous.on_ceiling and character.is_on_wall() and Player.state.direction.y.down:
+		on_wall = true
+
+	# this is a band-aid
+	elif previous.on_ceiling and character.is_on_wall():
+		return previous
+
+	elif character.is_on_floor():
+		on_floor = true
+
+	elif character.is_on_ceiling():
+		on_ceiling = true
+
+	elif character.is_on_wall():
+		on_wall = true
 
 	return {
 		"jumped": jumped,
