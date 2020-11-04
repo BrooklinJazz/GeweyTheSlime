@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=2]
+[gd_scene load_steps=41 format=2]
 
 [ext_resource path="res://sprites/slime-legs-walk-Sheet.png" type="Texture" id=1]
 [ext_resource path="res://sprites/slime-body.png" type="Texture" id=2]
@@ -10,55 +10,54 @@
 [ext_resource path="res://StateMachine.gd" type="Script" id=9]
 [ext_resource path="res://Animate.gd" type="Script" id=10]
 [ext_resource path="res://Physics.gd" type="Script" id=12]
-[ext_resource path="res://PlayerVariables.gd" type="Script" id=13]
+[ext_resource path="res://Player.gd" type="Script" id=13]
 [ext_resource path="res://GroundMovement.gd" type="Script" id=14]
 [ext_resource path="res://WallMovement.gd" type="Script" id=15]
 [ext_resource path="res://CeilingMovement.gd" type="Script" id=16]
-
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 1 )
 region = Rect2( 0, 0, 28, 4 )
 
 [sub_resource type="AtlasTexture" id=2]
-atlas = ExtResource( 1 )
-region = Rect2( 28, 0, 28, 4 )
+atlas = ExtResource( 7 )
+region = Rect2( 0, 0, 28, 4 )
 
 [sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 1 )
-region = Rect2( 56, 0, 28, 4 )
+region = Rect2( 28, 0, 28, 4 )
 
 [sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 1 )
-region = Rect2( 84, 0, 28, 4 )
+region = Rect2( 56, 0, 28, 4 )
 
 [sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 1 )
-region = Rect2( 112, 0, 28, 4 )
+region = Rect2( 84, 0, 28, 4 )
 
 [sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 1 )
-region = Rect2( 140, 0, 28, 4 )
+region = Rect2( 112, 0, 28, 4 )
 
 [sub_resource type="AtlasTexture" id=7]
 atlas = ExtResource( 1 )
-region = Rect2( 168, 0, 28, 4 )
+region = Rect2( 140, 0, 28, 4 )
 
 [sub_resource type="AtlasTexture" id=8]
-atlas = ExtResource( 4 )
-region = Rect2( 0, 0, 28, 4 )
+atlas = ExtResource( 1 )
+region = Rect2( 168, 0, 28, 4 )
 
 [sub_resource type="AtlasTexture" id=9]
 atlas = ExtResource( 4 )
-region = Rect2( 28, 0, 28, 4 )
+region = Rect2( 0, 0, 28, 4 )
 
 [sub_resource type="AtlasTexture" id=10]
 atlas = ExtResource( 4 )
-region = Rect2( 56, 0, 28, 4 )
+region = Rect2( 28, 0, 28, 4 )
 
 [sub_resource type="AtlasTexture" id=11]
-atlas = ExtResource( 7 )
-region = Rect2( 0, 0, 28, 4 )
+atlas = ExtResource( 4 )
+region = Rect2( 56, 0, 28, 4 )
 
 [sub_resource type="AtlasTexture" id=12]
 atlas = ExtResource( 7 )
@@ -86,27 +85,27 @@ region = Rect2( 168, 0, 28, 4 )
 
 [sub_resource type="SpriteFrames" id=18]
 animations = [ {
-"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ) ],
-"loop": true,
-"name": "walk",
-"speed": 24.0
-}, {
 "frames": [ SubResource( 1 ) ],
 "loop": false,
 "name": "idle",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 8 ), SubResource( 9 ), SubResource( 10 ) ],
-"loop": false,
-"name": "charge_jump",
-"speed": 12.0
-}, {
-"frames": [ SubResource( 11 ) ],
+"frames": [ SubResource( 2 ) ],
 "loop": true,
 "name": "grip_idle",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ) ],
+"frames": [ SubResource( 1 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
+"loop": true,
+"name": "walk",
+"speed": 24.0
+}, {
+"frames": [ SubResource( 9 ), SubResource( 10 ), SubResource( 11 ) ],
+"loop": false,
+"name": "charge_jump",
+"speed": 12.0
+}, {
+"frames": [ SubResource( 2 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ) ],
 "loop": true,
 "name": "grip",
 "speed": 12.0

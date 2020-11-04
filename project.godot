@@ -55,7 +55,7 @@ run/main_scene="res://World.tscn"
 
 [autoload]
 
-Player="*res://PlayerVariables.gd"
+Player="*res://Player.gd"
 
 [input]
 
