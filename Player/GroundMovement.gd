@@ -18,6 +18,12 @@ func get_motion(delta: float) -> Vector2:
 	if character.rotation_degrees != 0:
 		character.rotation_degrees = 0
 		character.global_position += Vector2(0, 7)
+	
+	# if on wall and input is up or into wall
+		# transition
+	# if character.is_on_wall() and Player.state.direction.y.up:
+		
+		
 	return Vector2(walk(delta), jump(delta))
 
 

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/slime-legs-grip-Sheet.png-8dd39e135b06d27764d5d777f18d46f5.stex"
+path="res://.import/slime-legs-jump-Sheet.png-0aa56db05a91c7fb0969e31d191d6650.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/slime-legs-grip-Sheet.png"
-dest_files=[ "res://.import/slime-legs-grip-Sheet.png-8dd39e135b06d27764d5d777f18d46f5.stex" ]
+source_file="res://Player/sprites/slime-legs-jump-Sheet.png"
+dest_files=[ "res://.import/slime-legs-jump-Sheet.png-0aa56db05a91c7fb0969e31d191d6650.stex" ]
 
 [params]
 

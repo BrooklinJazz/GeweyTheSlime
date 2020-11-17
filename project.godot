@@ -12,32 +12,32 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "CeilingMovement",
 "language": "GDScript",
-"path": "res://CeilingMovement.gd"
+"path": "res://Player/CeilingMovement.gd"
 }, {
 "base": "Node",
 "class": "GroundMovement",
 "language": "GDScript",
-"path": "res://GroundMovement.gd"
+"path": "res://Player/GroundMovement.gd"
 }, {
 "base": "Node",
 "class": "PlayerAnimate",
 "language": "GDScript",
-"path": "res://Animate.gd"
+"path": "res://Player/Animate.gd"
 }, {
 "base": "Node",
 "class": "PlayerPhysics",
 "language": "GDScript",
-"path": "res://Physics.gd"
+"path": "res://Player/Physics.gd"
 }, {
 "base": "Node",
 "class": "PlayerStateMachine",
 "language": "GDScript",
-"path": "res://StateMachine.gd"
+"path": "res://Player/StateMachine.gd"
 }, {
 "base": "Node",
 "class": "WallMovement",
 "language": "GDScript",
-"path": "res://WallMovement.gd"
+"path": "res://Player/WallMovement.gd"
 } ]
 _global_script_class_icons={
 "CeilingMovement": "",
@@ -55,7 +55,7 @@ run/main_scene="res://World.tscn"
 
 [autoload]
 
-Player="*res://Player.gd"
+Player="*res://Player/Player.gd"
 
 [input]
 

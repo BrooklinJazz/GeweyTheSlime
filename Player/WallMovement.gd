@@ -1,6 +1,6 @@
 extends Node
 
-const SPEED = 100
+const ACCELERATION = 200
 
 class_name WallMovement
 
@@ -12,16 +12,17 @@ func get_motion(delta: float) -> Vector2:
 	if character.rotation_degrees != 90 * reverse_multiplier():
 		character.rotation_degrees = 90 * reverse_multiplier()
 		character.global_position += Vector2(-7, 0) * reverse_multiplier()
-	return Vector2(Player.motion.x, climb())
+	return Vector2(Player.motion.x, climb(delta))
 
-
-func climb() -> float:
-	var motion = 0.0
+func climb(delta:float) -> float:
+	var motion = Player.motion.y
 	if (Player.state.direction.y.up):
-		motion = -SPEED
+		motion -= ACCELERATION * delta
 	elif (Player.state.direction.y.down):
-		motion = SPEED
-	return motion
+		motion += ACCELERATION *delta
+	else:
+		motion *= 0.95
+	return motion * 0.97
 
 func reverse_multiplier() -> int:
 	for i in range(self.character.get_slide_count()):

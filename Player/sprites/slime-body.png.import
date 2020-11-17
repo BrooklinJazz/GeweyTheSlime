@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/slime-body-jump-Sheet.png-30fa81c4b8f3c2cef37e22894af75b46.stex"
+path="res://.import/slime-body.png-6acf3155451113206eadce2345638a59.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/slime-body-jump-Sheet.png"
-dest_files=[ "res://.import/slime-body-jump-Sheet.png-30fa81c4b8f3c2cef37e22894af75b46.stex" ]
+source_file="res://Player/sprites/slime-body.png"
+dest_files=[ "res://.import/slime-body.png-6acf3155451113206eadce2345638a59.stex" ]
 
 [params]
 
