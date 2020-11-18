@@ -17,12 +17,12 @@ func get_motion(delta: float) -> Vector2:
 func climb(delta:float) -> float:
 	var motion = Player.motion.y # TODO add Brooklyns idea back when it doesnt break everything + Player.motion.x 
 	if (Player.state.direction.y.up):
-		motion = -ACCELERATION # * delta
+		motion += -ACCELERATION  * delta
 	elif (Player.state.direction.y.down):
-		motion = ACCELERATION # * delta
+		motion += ACCELERATION  * delta
 	else:
-		motion *= 0 #0.95
-	return motion * 1 #0.97
+		motion *= 0.95
+	return motion * 0.97
 
 func reverse_multiplier() -> int:
 	for i in range(self.character.get_slide_count()):
