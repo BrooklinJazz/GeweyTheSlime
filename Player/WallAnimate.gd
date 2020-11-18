@@ -27,8 +27,6 @@ func get_flip_h(previous_flip_h: bool):
 func play_current_animation():
 	self.body.set_animation("grip")
 	self.legs.set_animation("grip")
-	# set animation defaults to start playing for some reason
-#	self.legs.stop()
 	self.legs.set_frame(get_next_frame())
 	
 func get_next_frame() -> int:
