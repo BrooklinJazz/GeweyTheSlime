@@ -18,8 +18,7 @@ func update_player_state():
 	Player.state = StateMachine.get_state()
 
 func update_player_motion(delta: float):
-	Player.motion = Physics.get_motion(delta)
-	move_and_slide(Player.motion, Vector2.UP)
+	Player.motion = move_and_slide(Physics.get_motion(delta), Vector2.UP)
 	
 
 func update_player_animations():
