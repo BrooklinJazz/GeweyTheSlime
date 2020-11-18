@@ -15,8 +15,7 @@ func get_motion(delta: float) -> Vector2:
 	return Vector2(-reverse_multiplier(), climb(delta))
 
 func climb(delta:float) -> float:
-	print(Player.motion.y, Player.motion.x)
-	var motion = Player.motion.y - abs(Player.motion.x) 
+	var motion = Player.motion.y
 	if (Player.state.direction.y.up):
 		motion += -ACCELERATION  * delta
 	elif (Player.state.direction.y.down):
