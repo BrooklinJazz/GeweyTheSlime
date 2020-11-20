@@ -14,7 +14,5 @@ func animate() -> Vector2:
 
 func animate_factory() -> Node:
 	if (Player.state.airborne.on_wall and Player.state.movement.grip):
-		print("wall")
 		return WallAnimate.new(self.body, self.legs)
-	print("ground")
 	return GroundAnimate.new(self.body, self.legs)
