@@ -36,7 +36,7 @@ func play_current_animation():
 	elif Player.state.movement.charge_jump:
 		self.legs.play("charge_jump")
 		self.body.play("charge_jump")
-#		return
+		return
 	# set animation defaults to start playing for some reason
 	self.legs.stop()
 	self.legs.set_frame(get_next_frame())
