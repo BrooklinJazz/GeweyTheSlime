@@ -8,8 +8,8 @@ scale = Vector2( 1.00485, 1 )
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
-position = Vector2( 0, 27.3904 )
-polygon = PoolVector2Array( -382.147, 228.61, -382.147, 164.61, 254.764, 164.61, 254.764, 228.61, 891.675, 228.61, 891.675, -27.3904, 573.22, -27.3904, 573.22, 164.61, 509.529, 164.61, 509.529, -91.3904, 955.366, -91.3904, 955.366, 292.61, -382.147, 292.61 )
+position = Vector2( 0, 24 )
+polygon = PoolVector2Array( -382.147, 228.61, -382.147, 164.61, 175.151, 168, 254.764, 164.61, 254.764, 228.61, 891.675, 228.61, 891.675, -27.3904, 573.22, -27.3904, 573.22, 164.61, 509.529, 164.61, 509.529, -91.3904, 955.366, -91.3904, 955.366, 292.61, -382.147, 292.61 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 736.605, 247.269 )

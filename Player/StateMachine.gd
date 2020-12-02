@@ -134,5 +134,16 @@ func airborne_factory():
 		"on_ceiling": on_ceiling,
 		"on_floor": on_floor,
 		"on_wall": on_wall,
+		"on_wall_left": on_wall and wall_direction() == 'left',
+		"on_wall_right": on_wall and wall_direction() == 'right',
 		"idle": idle
 	}
+
+func wall_direction():
+	for i in range(self.character.get_slide_count()):
+		var collision = self.character.get_slide_collision(i)
+		if collision.normal.x > 0:
+			return "right"
+		elif collision.normal.x < 0:
+			return "left"
+	# return 1
