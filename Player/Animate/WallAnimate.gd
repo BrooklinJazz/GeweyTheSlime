@@ -17,10 +17,10 @@ func set_facing_direction():
 	self.body.flip_h = get_flip_h(self.body.flip_h)
 
 func get_flip_h(previous_flip_h: bool):
-	if (Player.state.direction.y.down):
-		return true
+	if Player.state.direction.y.down:
+		return Player.state.airborne.on_wall_left
 	elif Player.state.direction.y.up:
-		return false
+		return Player.state.airborne.on_wall_right
 	else:
 		return previous_flip_h
 	
