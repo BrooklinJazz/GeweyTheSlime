@@ -6,10 +6,10 @@ class_name HookState
 #vars exports to give some customizability to editor will add ranges
 #vars for all children
 export(float) var gravity = 10 #gravity influence on hook when extending out
-export(float) var baseRange = 200
-export(float) var maxRange = 1600
-export(float) var baseSpeed = 500
-export(float) var maxSpeed = 1000
+export(float) var baseRange = 100
+export(float) var maxRange = 1000
+export(float) var baseSpeed = 400
+export(float) var maxSpeed = 800
 export(float) var pullFactor = 3 #constant speed up when pulling player
 export(float) var pullExpFactor = 1.3 #exponent on distance when pulling
 export(float) var slowingFactor = 1 #slows x movement of extending hook approaching max range
@@ -50,13 +50,14 @@ func jump_out(): return null
 #	return null
 
 func handle_input_event(event):
-	if event.is_action_pressed("jump") && !event.is_echo() && event.is_pressed():
+	if event.is_echo(): return null
+	if event.is_action_pressed("jump"):
 		return jump_out()
-	if event.is_action("hook") && !event.is_echo() && event.is_pressed():
+	if event.is_action_pressed("hook"):
 		sharedVars.launchSpeed = baseSpeed
 		sharedVars.launchRange = baseRange
 		sharedVars._charginHook = true
-	elif event.is_action_released("hook") && !event.is_echo():
+	elif event.is_action_released("hook"):
 		sharedVars._charginHook = false
 		shoot_hook()
 		return "airOut"
