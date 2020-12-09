@@ -1,0 +1,42 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://hook/hookScripts/HookStateLatched.gd" type="Script" id=1]
+[ext_resource path="res://hook/hookScripts/HookStateAirOut.gd" type="Script" id=2]
+[ext_resource path="res://hook/hookScripts/HookStateAirIn.gd" type="Script" id=3]
+[ext_resource path="res://hook/hookScripts/HookStateVars.gd" type="Script" id=4]
+[ext_resource path="res://hook/hookScripts/HookStateMachine.gd" type="Script" id=5]
+[ext_resource path="res://hook/hookScripts/HookStateIdle.gd" type="Script" id=6]
+[ext_resource path="res://Player/sprites/slime-body.png" type="Texture" id=7]
+
+[sub_resource type="CircleShape2D" id=1]
+
+[node name="Hook" type="KinematicBody2D"]
+collision_layer = 4
+script = ExtResource( 5 )
+
+[node name="HookStates" type="Node" parent="."]
+script = ExtResource( 4 )
+
+[node name="HookStateAirIn" type="Node" parent="HookStates"]
+script = ExtResource( 3 )
+
+[node name="HookStateAirOut" type="Node" parent="HookStates"]
+script = ExtResource( 2 )
+
+[node name="HookStateIdle" type="Node" parent="HookStates"]
+script = ExtResource( 6 )
+
+[node name="HookStateLatched" type="Node" parent="HookStates"]
+script = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 0.785398
+scale = Vector2( 0.5, 0.5 )
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+modulate = Color( 1, 0, 0, 1 )
+self_modulate = Color( 1, 0, 0, 1 )
+scale = Vector2( 0.5, 0.5 )
+z_index = 10
+texture = ExtResource( 7 )

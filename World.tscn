@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://hook/Hook.tscn" type="PackedScene" id=2]
 
 [node name="World" type="Node2D"]
 scale = Vector2( 1.00485, 1 )
@@ -13,3 +14,6 @@ polygon = PoolVector2Array( -382.147, 228.61, -382.147, 164.61, 175.151, 168, 25
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 736.605, 247.269 )
+
+[node name="Hook" parent="." instance=ExtResource( 2 )]
+position = Vector2( 660.795, 176 )
