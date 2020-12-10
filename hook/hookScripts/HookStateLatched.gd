@@ -22,5 +22,5 @@ func exit_state(host): return
 func _yank_player(delta):
 	var playerPos = player.global_position
 	var hookPos = hook.global_position
-	Player.motion += (-delta*pow(hookPos.distance_to(playerPos), pullExpFactor)
-					*pullFactor*hookPos.direction_to(playerPos))
+	player.external_force((-delta*pow(hookPos.distance_to(playerPos), pullExpFactor)
+					*pullFactor*hookPos.direction_to(playerPos)))

@@ -8,7 +8,7 @@ func update_and_return(delta):
 	.update_and_return(delta)
 	if sharedVars.hit:
 		return "latched"
-	if hook.position.distance_to(player.position) < 40:
+	if hook.position.distance_to(player.position) < 40: #Paul is coming for you Jesse
 		sharedVars.currentMovement = Vector2.ZERO
 		return "idle"
 	return null
