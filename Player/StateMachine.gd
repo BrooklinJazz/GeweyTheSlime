@@ -68,10 +68,6 @@ class GrabbedFloorEventListener:
 class JumpEventListener:
 	func get_event(character):
 		return Events.FALL
-		
-class GroundEventHandler:
-	func on(event):
-		pass
 
 class WallEventListener extends EventListener:
 	func get_event(character):
@@ -92,10 +88,6 @@ class AirEventListener:
 		elif (!Input.is_action_pressed("grip")):
 			return Events.RELEASE
 
-class AirEventHandler:
-	func on(event):
-		pass
-
 class EventListenerFactory:
 	static func create(state):
 		if (state == States.AIR):
@@ -115,12 +107,7 @@ class EventListenerFactory:
 
 class EventHandlerFactory:
 	static func create(state):
-		if (state == States.AIR):
-			return AirEventHandler.new()
-		elif (state == States.GROUND):
-			return GroundEventHandler.new()
-		else:
-			return EventHandler.new()
+		return EventHandler.new()
 
 var FSM = {
 	States.AIR: {
