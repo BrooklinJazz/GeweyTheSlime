@@ -104,6 +104,10 @@ run/main_scene="res://World.tscn"
 [autoload]
 
 Player="*res://Player/Player.gd"
+PrevMotion="*res://Player/PrevMotion.gd"
+Events="*res://Player/Events.gd"
+States="*res://Player/States.gd"
+Transitions="*res://Player/Transitions.gd"
 
 [input]
 

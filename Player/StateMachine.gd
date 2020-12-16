@@ -1,22 +1,158 @@
 extends Node
 
-# Called when the node enters the scene tree for the first time.
-class_name PlayerStateMachine
 
+func StateMachineAdapter(currentState):
+	var jumped = false
+	var on_ceiling = false
+	var on_floor = false
+	var on_wall = false
+	var idle = false
+	var on_wall_left = false
+	var on_wall_right = false
+	if (currentState == States.GROUND):
+		on_floor = true
+	elif (currentState == States.JUMPED):
+		jumped = true
+	return {
+			"jumped": jumped,
+			"on_ceiling": on_ceiling,
+			"on_floor": on_floor,
+			"on_wall": on_wall,
+			"idle": idle,
+			"on_wall_left": on_wall_left,
+			"on_wall_right": on_wall_right,
+		}
+
+class EventHandler:
+	func on(event):
+		pass
+		
+class EventListener:
+	func get_event(character):
+		pass
+
+class GroundEventListener:
+	func get_event(character):
+		if (Input.is_action_just_released("jump")):
+			return Events.JUMP
+			
+class JumpEventListener:
+	func get_event(character):
+		return Events.FALL
+
+		
+class GroundEventHandler:
+	func on(event):
+		pass
+
+class AirEventListener:
+	func get_event(character):
+		if (character.is_on_floor()):
+			return Events.LAND
+
+class AirEventHandler:
+	func on(event):
+		pass
+
+class EventListenerFactory:
+	static func create(state):
+		print(state)
+		if (state == States.AIR):
+			return AirEventListener.new()
+		elif (state == States.GROUND):
+			return GroundEventListener.new()
+		elif (state == States.JUMPED):
+			return JumpEventListener.new()
+		else:
+			return EventListener.new()
+
+class EventHandlerFactory:
+	static func create(state):
+		if (state == States.AIR):
+			return AirEventHandler.new()
+		elif (state == States.GROUND):
+			return GroundEventHandler.new()
+		else:
+			return EventHandler.new()
+
+var FSM = {
+	States.AIR: {
+		Events.ATTACH_TO_CEILING: States.Grabbed.CEILING,
+		Events.ATTACH_TO_FLOOR: States.Grabbed.FLOOR,
+		Events.LAND: States.GROUND
+	},
+#	bit of a hack to make the StateMachineAdapter work. should remove
+	States.JUMPED: {
+		Events.FALL: States.AIR
+	},
+	States.GROUND: {
+		Events.FALL: States.AIR,
+		Events.JUMP: States.JUMPED,
+	},
+	States.Grabbed.FLOOR: {
+		Events.ATTACH_TO_LEFT_WALL: States.Grabbed.LEFT_WALL,
+		Events.ATTACH_TO_RIGHT_WALL: States.Grabbed.RIGHT_WALL,
+		Events.RELEASE: States.GROUND
+	},
+	States.Grabbed.LEFT_WALL: {
+		Events.ATTACH_TO_FLOOR: States.Grabbed.FLOOR,
+		Events.ATTACH_TO_CEILING: States.Grabbed.CEILING,
+		Events.RELEASE: States.AIR
+	},
+	States.Grabbed.RIGHT_WALL: {
+		Events.ATTACH_TO_FLOOR: States.Grabbed.FLOOR,
+		Events.ATTACH_TO_CEILING: States.Grabbed.CEILING,
+		Events.RELEASE: States.AIR
+	},
+	States.Grabbed.CEILING: {
+		Events.RELEASE: States.AIR,
+		Events.ATTACH_TO_LEFT_WALL: States.Grabbed.LEFT_WALL,
+		Events.ATTACH_TO_RIGHT_WALL: States.Grabbed.RIGHT_WALL
+	}	
+}
+
+class StateMachine:
+	var current_state = States.AIR
+	var fsm
+	func _init(state, machine):
+		fsm = machine
+		current_state = state
+		
+		 
+	func transition(character):
+		var transitions = fsm[current_state]
+		var event_handler = EventHandlerFactory.create(current_state)
+		var listener = EventListenerFactory.create(current_state)
+		var event = listener.get_event(character)
+		print(event)
+		if event in transitions:
+			event_handler.on(event)
+			current_state = transitions[event]
+
+
+class_name PlayerStateMachine
+var state_machine
 var character
+
+
 func _init(parent):
 	character = parent
+	state_machine = StateMachine.new(States.AIR, FSM)
 	
+
 func get_state():
+	
+	print(state_machine)
+	state_machine.transition(character)
 	return {
-		"airborne": airborne_factory(),
+		"airborne": StateMachineAdapter(state_machine.current_state),
 		"direction": {
 			"x": x_direction_factory(),
 			"y": y_direction_factory()
 		},
 		"movement": movement_factory()
 	}
-	
+
 func x_direction_factory():
 	var right = false
 	var center = false
@@ -69,9 +205,9 @@ func movement_factory():
 		"grip": grip,
 		"walk": walk
 	}
-		
+
 func airborne_factory():
-#	TODO - expand this factory to introduce all states
+##	TODO - expand this factory to introduce all states
 	var jumped = false
 	var on_ceiling = false
 	var on_floor = false
