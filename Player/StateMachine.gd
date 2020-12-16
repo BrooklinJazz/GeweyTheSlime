@@ -1,7 +1,7 @@
 extends Node
 
 
-func StateMachineAdapter(currentState):
+func StateMachineAdapter(current_state):
 	var jumped = false
 	var on_ceiling = false
 	var on_floor = false
@@ -9,16 +9,18 @@ func StateMachineAdapter(currentState):
 	var idle = false
 	var on_wall_left = false
 	var on_wall_right = false
-	if (currentState == States.GROUND):
+	if (current_state == States.GROUND):
 		on_floor = true
-	elif (currentState == States.JUMPED):
+	elif (current_state == States.JUMPED):
 		jumped = true
-	elif (currentState == States.Grabbed.LEFT_WALL):
+	elif (current_state == States.Grabbed.LEFT_WALL):
 		on_wall = true
-		on_wall_left = true
-	elif (currentState == States.Grabbed.RIGHT_WALL):
+		on_wall_right = true # obviously wrong and needs to be changed but works
+	elif (current_state == States.Grabbed.RIGHT_WALL):
 		on_wall = true
-		on_wall_left = true
+		on_wall_left = true # obviously wrong and needs to be changed but works
+	elif (current_state == States.Grabbed.CEILING):
+		on_ceiling = true
 	return {
 			"jumped": jumped,
 			"on_ceiling": on_ceiling,
@@ -35,7 +37,7 @@ class EventHandler:
 		
 class EventListener:
 	func get_event(character):
-		if (Input.is_action_just_released("grip")):
+		if (!Input.is_action_pressed("grip")):
 			return Events.RELEASE
 
 class GroundEventListener:
@@ -44,17 +46,25 @@ class GroundEventListener:
 			return Events.JUMP
 		elif (Input.is_action_pressed("grip")):
 			return Events.ATTACH_TO_FLOOR
-			
+
+class CeilingEventListener:
+	func get_event(character):
+		if (!Input.is_action_pressed("grip")):
+			return Events.RELEASE
+		elif (character.is_on_wall() and Input.is_action_pressed("right")):
+			return Events.ATTACH_TO_RIGHT_WALL
+		elif (character.is_on_wall() and Input.is_action_pressed("left")):
+			return Events.ATTACH_TO_LEFT_WALL
+
 class GrabbedFloorEventListener:
 	func get_event(character):
-		print(character.is_on_wall())
 		if (character.is_on_wall() and Input.is_action_pressed("left")):
 			return Events.ATTACH_TO_LEFT_WALL
 		elif (character.is_on_wall() and Input.is_action_pressed("right")):
 			return Events.ATTACH_TO_RIGHT_WALL
 		elif (Input.is_action_just_released("grip")):
 			return Events.RELEASE
-			
+
 class JumpEventListener:
 	func get_event(character):
 		return Events.FALL
@@ -63,10 +73,24 @@ class GroundEventHandler:
 	func on(event):
 		pass
 
+class WallEventListener extends EventListener:
+	func get_event(character):
+		if (character.is_on_ceiling() and Input.is_action_pressed("up")):
+			return Events.ATTACH_TO_CEILING
+		if (!Input.is_action_pressed("grip")):
+			return Events.RELEASE
+			
+
 class AirEventListener:
 	func get_event(character):
 		if (character.is_on_floor()):
 			return Events.LAND
+		elif (character.is_on_wall() and Input.is_action_pressed("left") and Input.is_action_pressed("grip")):
+			return Events.ATTACH_TO_LEFT_WALL
+		elif (character.is_on_wall() and Input.is_action_pressed("right") and Input.is_action_pressed("grip")):
+			return Events.ATTACH_TO_RIGHT_WALL
+		elif (!Input.is_action_pressed("grip")):
+			return Events.RELEASE
 
 class AirEventHandler:
 	func on(event):
@@ -82,6 +106,10 @@ class EventListenerFactory:
 			return JumpEventListener.new()
 		elif (state == States.Grabbed.FLOOR):
 			return GrabbedFloorEventListener.new()
+		elif (state == States.Grabbed.LEFT_WALL or state == States.Grabbed.RIGHT_WALL):
+			return WallEventListener.new()
+		elif (state == States.Grabbed.CEILING):
+			return CeilingEventListener.new()
 		else:
 			return EventListener.new()
 
@@ -98,6 +126,8 @@ var FSM = {
 	States.AIR: {
 		Events.ATTACH_TO_CEILING: States.Grabbed.CEILING,
 		Events.ATTACH_TO_FLOOR: States.Grabbed.FLOOR,
+		Events.ATTACH_TO_LEFT_WALL: States.Grabbed.LEFT_WALL,
+		Events.ATTACH_TO_RIGHT_WALL: States.Grabbed.RIGHT_WALL,
 		Events.LAND: States.GROUND
 	},
 #	bit of a hack to make the StateMachineAdapter work. should remove
