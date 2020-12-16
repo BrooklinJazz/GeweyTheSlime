@@ -13,6 +13,12 @@ func StateMachineAdapter(currentState):
 		on_floor = true
 	elif (currentState == States.JUMPED):
 		jumped = true
+	elif (currentState == States.Grabbed.LEFT_WALL):
+		on_wall = true
+		on_wall_left = true
+	elif (currentState == States.Grabbed.RIGHT_WALL):
+		on_wall = true
+		on_wall_left = true
 	return {
 			"jumped": jumped,
 			"on_ceiling": on_ceiling,
@@ -29,17 +35,29 @@ class EventHandler:
 		
 class EventListener:
 	func get_event(character):
-		pass
+		if (Input.is_action_just_released("grip")):
+			return Events.RELEASE
 
 class GroundEventListener:
 	func get_event(character):
 		if (Input.is_action_just_released("jump")):
 			return Events.JUMP
+		elif (Input.is_action_pressed("grip")):
+			return Events.ATTACH_TO_FLOOR
+			
+class GrabbedFloorEventListener:
+	func get_event(character):
+		print(character.is_on_wall())
+		if (character.is_on_wall() and Input.is_action_pressed("left")):
+			return Events.ATTACH_TO_LEFT_WALL
+		elif (character.is_on_wall() and Input.is_action_pressed("right")):
+			return Events.ATTACH_TO_RIGHT_WALL
+		elif (Input.is_action_just_released("grip")):
+			return Events.RELEASE
 			
 class JumpEventListener:
 	func get_event(character):
 		return Events.FALL
-
 		
 class GroundEventHandler:
 	func on(event):
@@ -56,13 +74,14 @@ class AirEventHandler:
 
 class EventListenerFactory:
 	static func create(state):
-		print(state)
 		if (state == States.AIR):
 			return AirEventListener.new()
 		elif (state == States.GROUND):
 			return GroundEventListener.new()
 		elif (state == States.JUMPED):
 			return JumpEventListener.new()
+		elif (state == States.Grabbed.FLOOR):
+			return GrabbedFloorEventListener.new()
 		else:
 			return EventListener.new()
 
@@ -88,6 +107,7 @@ var FSM = {
 	States.GROUND: {
 		Events.FALL: States.AIR,
 		Events.JUMP: States.JUMPED,
+		Events.ATTACH_TO_FLOOR: States.Grabbed.FLOOR
 	},
 	States.Grabbed.FLOOR: {
 		Events.ATTACH_TO_LEFT_WALL: States.Grabbed.LEFT_WALL,
@@ -124,7 +144,7 @@ class StateMachine:
 		var event_handler = EventHandlerFactory.create(current_state)
 		var listener = EventListenerFactory.create(current_state)
 		var event = listener.get_event(character)
-		print(event)
+		print(current_state, event, transitions)
 		if event in transitions:
 			event_handler.on(event)
 			current_state = transitions[event]
@@ -142,7 +162,6 @@ func _init(parent):
 
 func get_state():
 	
-	print(state_machine)
 	state_machine.transition(character)
 	return {
 		"airborne": StateMachineAdapter(state_machine.current_state),
