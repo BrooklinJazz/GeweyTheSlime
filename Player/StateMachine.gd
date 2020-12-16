@@ -161,7 +161,6 @@ class StateMachine:
 		var event_handler = EventHandlerFactory.create(current_state)
 		var listener = EventListenerFactory.create(current_state)
 		var event = listener.get_event(character)
-		print(current_state, event, transitions)
 		if event in transitions:
 			event_handler.on(event)
 			current_state = transitions[event]
@@ -241,81 +240,3 @@ func movement_factory():
 		"grip": grip,
 		"walk": walk
 	}
-
-func airborne_factory():
-##	TODO - expand this factory to introduce all states
-	var jumped = false
-	var on_ceiling = false
-	var on_floor = false
-	var on_wall = false
-	var idle = false
-
-	var previous = Player.state.airborne
-	if not previous:
-		previous = {
-			"jumped": jumped,
-			"on_ceiling": on_ceiling,
-			"on_floor": on_floor,
-			"on_wall": on_wall,
-			"idle": idle
-		}
-
-	# TODO: someone please help
-	if (Input.is_action_just_released("jump") and self.character.is_on_floor()):
-		jumped = true
-
-	elif character.is_on_floor() and character.is_on_wall() and Player.state.direction.y.up:
-		on_wall = true
-
-	elif character.is_on_wall() and character.is_on_floor() and not Player.state.direction.x.center:
-		on_floor = true
-
-	elif character.is_on_wall() and character.is_on_ceiling() and not Player.state.direction.x.center:
-		on_ceiling = true
-
-	elif character.is_on_ceiling() and character.is_on_wall() and Player.state.direction.y.down:
-		on_wall = true
-
-	elif character.is_on_floor() and character.is_on_wall():
-		return previous
-
-	# for some reason is_on_ceiling() is not true when upside down in the corner?
-	# so two band-aids cover for this jank
-	elif character.is_on_wall() and character.is_on_ceiling():
-		return previous
-
-	# this is a band-aid on a band-aid
-	elif previous.on_ceiling and character.is_on_wall() and Player.state.direction.y.down:
-		on_wall = true
-
-	# this is a band-aid
-	elif previous.on_ceiling and character.is_on_wall():
-		return previous
-
-	elif character.is_on_floor():
-		on_floor = true
-
-	elif character.is_on_ceiling():
-		on_ceiling = true
-
-	elif character.is_on_wall():
-		on_wall = true
-
-	return {
-		"jumped": jumped,
-		"on_ceiling": on_ceiling,
-		"on_floor": on_floor,
-		"on_wall": on_wall,
-		"on_wall_left": on_wall and wall_direction() == 'left',
-		"on_wall_right": on_wall and wall_direction() == 'right',
-		"idle": idle
-	}
-
-func wall_direction():
-	for i in range(self.character.get_slide_count()):
-		var collision = self.character.get_slide_collision(i)
-		if collision.normal.x > 0:
-			return "right"
-		elif collision.normal.x < 0:
-			return "left"
-	# return 1
