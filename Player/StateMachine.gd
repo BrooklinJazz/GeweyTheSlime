@@ -30,10 +30,6 @@ func StateMachineAdapter(current_state):
 			"on_wall_left": on_wall_left,
 			"on_wall_right": on_wall_right,
 		}
-
-class EventHandler:
-	func on(event):
-		pass
 		
 class EventListener:
 	func get_event(character):
@@ -78,7 +74,6 @@ class WallEventListener extends EventListener:
 		if (!Input.is_action_pressed("grip")):
 			return Events.RELEASE
 			
-
 class AirEventListener:
 	func get_event(character):
 		if (character.is_on_floor()):
@@ -109,9 +104,28 @@ class EventListenerFactory:
 		else:
 			return EventListener.new()
 
+class EventHandler:
+	func on(event, character):
+		if (event == Events.ATTACH_TO_LEFT_WALL):
+			character.rotation_degrees = 90
+			character.global_position += Vector2(-7, 0)
+		elif (event == Events.ATTACH_TO_RIGHT_WALL):
+			character.rotation_degrees = -90
+			character.global_position += Vector2(7, 0)
+
 class EventHandlerFactory:
 	static func create(state):
 		return EventHandler.new()
+
+# FSM
+# -> Listener (Emitter)
+# -> Handler (Physics process)
+
+# High Level Overview of State Machine
+# State Machine Adapter
+# Codify Events & Transitions
+# EventHandler -> On Transition
+
 
 var FSM = {
 	States.AIR: {
@@ -159,14 +173,13 @@ class StateMachine:
 		fsm = machine
 		current_state = state
 		
-		 
 	func transition(character):
 		var transitions = fsm[current_state]
 		var event_handler = EventHandlerFactory.create(current_state)
 		var listener = EventListenerFactory.create(current_state)
 		var event = listener.get_event(character)
 		if event in transitions:
-			event_handler.on(event)
+			event_handler.on(event, character)
 			current_state = transitions[event]
 
 

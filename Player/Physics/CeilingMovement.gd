@@ -10,7 +10,6 @@ func _init(parent):
 
 func get_motion(delta: float) -> Vector2:
 	if abs(character.rotation_degrees) < 179 or abs(character.rotation_degrees) > 181:
-		print(character.rotation_degrees)
 		character.rotation_degrees = 180
 		character.global_position += Vector2(0, -8)
 

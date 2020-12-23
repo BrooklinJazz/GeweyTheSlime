@@ -9,17 +9,10 @@ func _init(parent):
 	character = parent
 
 func get_motion(delta: float):
-	# TODO: Make this succint but readable
 	if Player.state.airborne.on_wall_right:
-		if character.rotation_degrees != 90:
-			character.rotation_degrees = 90
-			character.global_position += Vector2(-7, 0)
 		return Vector2(-1, climb(delta))
 
 	if Player.state.airborne.on_wall_left:
-		if character.rotation_degrees != -90:
-			character.rotation_degrees = -90
-			character.global_position += Vector2(7, 0)
 		return Vector2(1, climb(delta))
 
 func climb(delta:float) -> float:
