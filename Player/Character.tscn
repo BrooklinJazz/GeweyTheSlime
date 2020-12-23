@@ -179,7 +179,7 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="Collision" type="CollisionShape2D" parent="."]
 position = Vector2( 0.0294991, -0.493613 )
 shape = SubResource( 26 )
 
@@ -213,3 +213,19 @@ state = {
 "direction": null,
 "movement": null
 }
+
+[node name="UpRay" type="RayCast2D" parent="."]
+enabled = true
+cast_to = Vector2( 0, -9 )
+
+[node name="DownRay" type="RayCast2D" parent="."]
+enabled = true
+cast_to = Vector2( 0, 9 )
+
+[node name="RightRay" type="RayCast2D" parent="."]
+enabled = true
+cast_to = Vector2( 15, 0 )
+
+[node name="LeftRay" type="RayCast2D" parent="."]
+enabled = true
+cast_to = Vector2( -15, 0 )
