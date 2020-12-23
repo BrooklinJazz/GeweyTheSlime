@@ -10,19 +10,9 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Node",
-"class": "CeilingMovement",
-"language": "GDScript",
-"path": "res://Player/Physics/CeilingMovement.gd"
-}, {
-"base": "Node",
 "class": "GroundAnimate",
 "language": "GDScript",
 "path": "res://Player/Animate/GroundAnimate.gd"
-}, {
-"base": "Node",
-"class": "GroundMovement",
-"language": "GDScript",
-"path": "res://Player/Physics/GroundMovement.gd"
 }, {
 "base": "Node",
 "class": "HookState",
@@ -60,11 +50,6 @@ _global_script_classes=[ {
 "path": "res://Player/Animate/Animate.gd"
 }, {
 "base": "Node",
-"class": "PlayerPhysics",
-"language": "GDScript",
-"path": "res://Player/Physics/Physics.gd"
-}, {
-"base": "Node",
 "class": "PlayerStateMachine",
 "language": "GDScript",
 "path": "res://Player/StateMachine.gd"
@@ -73,16 +58,9 @@ _global_script_classes=[ {
 "class": "WallAnimate",
 "language": "GDScript",
 "path": "res://Player/Animate/WallAnimate.gd"
-}, {
-"base": "Node",
-"class": "WallMovement",
-"language": "GDScript",
-"path": "res://Player/Physics/WallMovement.gd"
 } ]
 _global_script_class_icons={
-"CeilingMovement": "",
 "GroundAnimate": "",
-"GroundMovement": "",
 "HookState": "",
 "HookStateAirIn": "",
 "HookStateAirOut": "",
@@ -90,10 +68,8 @@ _global_script_class_icons={
 "HookStateLatched": "",
 "HookStateMachine": "",
 "PlayerAnimate": "",
-"PlayerPhysics": "",
 "PlayerStateMachine": "",
-"WallAnimate": "",
-"WallMovement": ""
+"WallAnimate": ""
 }
 
 [application]
