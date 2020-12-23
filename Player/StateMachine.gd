@@ -73,6 +73,8 @@ class WallEventListener extends EventListener:
 	func get_event(character):
 		if (character.is_on_ceiling() and Input.is_action_pressed("up")):
 			return Events.ATTACH_TO_CEILING
+		elif (!character.is_on_wall()):
+			return Events.RELEASE
 		if (!Input.is_action_pressed("grip")):
 			return Events.RELEASE
 			
@@ -81,6 +83,8 @@ class AirEventListener:
 	func get_event(character):
 		if (character.is_on_floor()):
 			return Events.LAND
+		elif (character.is_on_ceiling()):
+			return Events.ATTACH_TO_CEILING
 		elif (character.is_on_wall() and Input.is_action_pressed("left") and Input.is_action_pressed("grip")):
 			return Events.ATTACH_TO_LEFT_WALL
 		elif (character.is_on_wall() and Input.is_action_pressed("right") and Input.is_action_pressed("grip")):
