@@ -58,6 +58,10 @@ class CeilingState extends State:
 			return Events.ATTACH_TO_RIGHT_WALL
 		elif (character.is_on_wall() and Input.is_action_pressed("left")):
 			return Events.ATTACH_TO_LEFT_WALL
+			
+	func on_enter(character):
+		character.rotation_degrees = 180
+		character.global_position += Vector2(0, -9)
 
 class GrabbedFloorState extends State:
 	func get_event(character):
