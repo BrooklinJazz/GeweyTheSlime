@@ -31,28 +31,35 @@ func StateMachineAdapter(current_state):
 			"on_wall_right": on_wall_right,
 		}
 		
-class EventListener:
-	func get_event(character):
-		if (!Input.is_action_pressed("grip")):
-			return Events.RELEASE
 
-class GroundEventListener:
+class State:
+	func get_event(character):
+		pass
+	func on_exit(event, character):
+		pass
+	func on_enter(character):
+		pass
+	
+
+class GroundState extends State:
 	func get_event(character):
 		if (Input.is_action_just_released("jump")):
 			return Events.JUMP
 		elif (Input.is_action_pressed("grip")):
 			return Events.ATTACH_TO_FLOOR
 
-class CeilingEventListener:
+class CeilingState extends State:
 	func get_event(character):
 		if (!Input.is_action_pressed("grip")):
+			return Events.RELEASE
+		elif (!character.is_on_ceiling()):
 			return Events.RELEASE
 		elif (character.is_on_wall() and Input.is_action_pressed("right")):
 			return Events.ATTACH_TO_RIGHT_WALL
 		elif (character.is_on_wall() and Input.is_action_pressed("left")):
 			return Events.ATTACH_TO_LEFT_WALL
 
-class GrabbedFloorEventListener:
+class GrabbedFloorState extends State:
 	func get_event(character):
 		if (character.is_on_wall() and Input.is_action_pressed("left")):
 			return Events.ATTACH_TO_LEFT_WALL
@@ -61,11 +68,11 @@ class GrabbedFloorEventListener:
 		elif (Input.is_action_just_released("grip")):
 			return Events.RELEASE
 
-class JumpEventListener:
+class JumpState extends State:
 	func get_event(character):
 		return Events.FALL
-
-class WallEventListener extends EventListener:
+			
+class RightWallState extends State:
 	func get_event(character):
 		if (character.is_on_ceiling() and Input.is_action_pressed("up")):
 			return Events.ATTACH_TO_CEILING
@@ -74,7 +81,27 @@ class WallEventListener extends EventListener:
 		if (!Input.is_action_pressed("grip")):
 			return Events.RELEASE
 			
-class AirEventListener:
+	func on_enter(character):
+		character.rotation_degrees = 90
+		character.global_position += Vector2(-7, 0)
+		
+		
+
+class LeftWallState extends State:
+	func get_event(character):
+		if (character.is_on_ceiling() and Input.is_action_pressed("up")):
+			return Events.ATTACH_TO_CEILING
+		elif (!character.is_on_wall()):
+			return Events.RELEASE
+		if (!Input.is_action_pressed("grip")):
+			return Events.RELEASE
+			
+	func on_enter(character):
+		character.rotation_degrees = -90
+		character.global_position += Vector2(7, 0)
+
+
+class AirState extends State:
 	func get_event(character):
 		if (character.is_on_floor()):
 			return Events.LAND
@@ -86,45 +113,6 @@ class AirEventListener:
 			return Events.ATTACH_TO_RIGHT_WALL
 		elif (!Input.is_action_pressed("grip")):
 			return Events.RELEASE
-
-class EventListenerFactory:
-	static func create(state):
-		if (state == States.AIR):
-			return AirEventListener.new()
-		elif (state == States.GROUND):
-			return GroundEventListener.new()
-		elif (state == States.JUMPED):
-			return JumpEventListener.new()
-		elif (state == States.Grabbed.FLOOR):
-			return GrabbedFloorEventListener.new()
-		elif (state == States.Grabbed.LEFT_WALL or state == States.Grabbed.RIGHT_WALL):
-			return WallEventListener.new()
-		elif (state == States.Grabbed.CEILING):
-			return CeilingEventListener.new()
-		else:
-			return EventListener.new()
-
-class EventHandler:
-	func on(event, character):
-		if (event == Events.ATTACH_TO_LEFT_WALL):
-			character.rotation_degrees = 90
-			character.global_position += Vector2(-7, 0)
-		elif (event == Events.ATTACH_TO_RIGHT_WALL):
-			character.rotation_degrees = -90
-			character.global_position += Vector2(7, 0)
-
-class EventHandlerFactory:
-	static func create(state):
-		return EventHandler.new()
-
-# FSM
-# -> Listener (Emitter)
-# -> Handler (Physics process)
-
-# High Level Overview of State Machine
-# State Machine Adapter
-# Codify Events & Transitions
-# EventHandler -> On Transition
 
 
 var FSM = {
@@ -166,21 +154,32 @@ var FSM = {
 	}	
 }
 
+
+
 class StateMachine:
 	var current_state = States.AIR
 	var fsm
+	var state_factory = {
+		States.AIR: AirState.new(),
+		States.JUMPED: JumpState.new(),
+		States.GROUND: GroundState.new(),
+		States.Grabbed.FLOOR:  GrabbedFloorState.new(),
+		States.Grabbed.LEFT_WALL: RightWallState.new(),
+		States.Grabbed.RIGHT_WALL: LeftWallState.new(),
+		States.Grabbed.CEILING: CeilingState.new()
+	}
 	func _init(state, machine):
 		fsm = machine
 		current_state = state
 		
 	func transition(character):
 		var transitions = fsm[current_state]
-		var event_handler = EventHandlerFactory.create(current_state)
-		var listener = EventListenerFactory.create(current_state)
-		var event = listener.get_event(character)
+		var state = state_factory[current_state]
+		var event = state.get_event(character)
 		if event in transitions:
-			event_handler.on(event, character)
+			state.on_exit(event, character)
 			current_state = transitions[event]
+			state_factory[current_state].on_enter(character)
 
 
 class_name PlayerStateMachine
