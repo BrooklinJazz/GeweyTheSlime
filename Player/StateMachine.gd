@@ -60,7 +60,9 @@ class GroundState extends State:
 			return Events.JUMP
 		elif (Input.is_action_pressed("grip")):
 			return Events.ATTACH_TO_FLOOR
-			
+		elif (!character.on_floor()):
+			return Events.FALL
+
 	func on_enter(character):
 		character.rotate_down()
 	
@@ -93,6 +95,11 @@ class GrabbedFloorState extends State:
 			return Events.ATTACH_TO_RIGHT_WALL
 		elif (Input.is_action_just_released("grip")):
 			return Events.RELEASE
+		elif (!character.on_floor()):
+			return Events.FALL
+
+	func get_motion(delta: float) -> Vector2:
+		return Vector2(walk(delta), 0)
 
 class JumpState extends State:
 	func get_motion(delta):
@@ -183,7 +190,8 @@ var FSM = {
 	States.Grabbed.FLOOR: {
 		Events.ATTACH_TO_LEFT_WALL: States.Grabbed.LEFT_WALL,
 		Events.ATTACH_TO_RIGHT_WALL: States.Grabbed.RIGHT_WALL,
-		Events.RELEASE: States.GROUND
+		Events.RELEASE: States.GROUND,
+		Events.FALL: States.AIR
 	},
 	States.Grabbed.LEFT_WALL: {
 		Events.ATTACH_TO_FLOOR: States.Grabbed.FLOOR,
