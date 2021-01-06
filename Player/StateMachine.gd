@@ -67,7 +67,7 @@ class GroundState extends State:
 		character.rotate_down()
 	
 	func get_motion(delta: float) -> Vector2:
-		return Vector2(walk(delta), 0)
+		return Vector2(walk(delta), Player.motion.y)
 
 class CeilingState extends State:
 	func get_event(character):
@@ -82,7 +82,6 @@ class CeilingState extends State:
 			
 	func on_enter(character):
 		character.rotate_up()
-#		character.global_position += Vector2(0, -1)
 		
 	func get_motion(delta):
 		return Vector2(ceiling_climb(delta), -1)
@@ -119,11 +118,6 @@ class RightWallState extends State:
 			
 	func on_enter(character):
 		character.rotate_right()
-#		character.global_position += Vector2(7, 0)
-		
-#	func on_exit(character, event):
-#		if (event == Events.ATTACH_TO_CEILING):
-#			character.global_position += Vector2(0, -9)
 		
 	func get_motion(delta):
 		return Vector2(1, wall_climb(delta))
@@ -139,11 +133,7 @@ class LeftWallState extends State:
 			
 	func on_enter(character):
 		character.rotate_left()
-#		character.global_position += Vector2(-7, 0)
-		
-#	func on_exit(character, event):
-#		if (event == Events.ATTACH_TO_CEILING):
-#			character.global_position += Vector2(0, -9)
+
 	func get_motion(delta):
 		return Vector2(-1, wall_climb(delta))
 
