@@ -7,3 +7,4 @@ export var state = {
 }
 
 var motion = Vector2()
+var previous_motion = Vector2()

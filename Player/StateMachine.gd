@@ -82,9 +82,13 @@ class CeilingState extends State:
 			
 	func on_enter(character):
 		character.rotate_up()
+		if (Player.previous_motion.x == 0 and Input.is_action_pressed("left")):
+			Player.motion.x = Player.previous_motion.y
+		elif (Player.previous_motion.x == 0 and Input.is_action_pressed("right")):
+			Player.motion.x = -Player.previous_motion.y
 		
 	func get_motion(delta):
-		return Vector2(ceiling_climb(delta), -1)
+		return Vector2(ceiling_climb(delta), Player.motion.y)
 
 class GrabbedFloorState extends State:
 	func get_event(character):
@@ -98,7 +102,7 @@ class GrabbedFloorState extends State:
 			return Events.FALL
 
 	func get_motion(delta: float) -> Vector2:
-		return Vector2(walk(delta), 0)
+		return Vector2(walk(delta),  Player.motion.y)
 
 class JumpState extends State:
 	func get_motion(delta):
@@ -118,9 +122,14 @@ class RightWallState extends State:
 			
 	func on_enter(character):
 		character.rotate_right()
+		if (Player.previous_motion.y == 0 and Input.is_action_pressed("up")):
+			Player.motion.y = -Player.previous_motion.x
+		elif (Player.previous_motion.y == 0 and Input.is_action_pressed("down")):
+			Player.motion.y = Player.previous_motion.x
+
 		
 	func get_motion(delta):
-		return Vector2(1, wall_climb(delta))
+		return Vector2(Player.motion.x, wall_climb(delta))
 		
 class LeftWallState extends State:
 	func get_event(character):
@@ -133,9 +142,13 @@ class LeftWallState extends State:
 			
 	func on_enter(character):
 		character.rotate_left()
+		if (Player.previous_motion.y == 0 and Input.is_action_pressed("up")):
+			Player.motion.y = Player.previous_motion.x
+		elif (Player.previous_motion.y == 0 and Input.is_action_pressed("down")):
+			Player.motion.y = -Player.previous_motion.x
 
 	func get_motion(delta):
-		return Vector2(-1, wall_climb(delta))
+		return Vector2(Player.motion.x, wall_climb(delta))
 
 class AirState extends State:
 	func get_motion(delta):
@@ -214,11 +227,10 @@ func run(character,  delta):
 	var state = state_factory[current_state]
 	var event = state.get_event(character)
 #	TODO Extract
+	if Player.motion != Vector2.ZERO:
+		Player.previous_motion = Player.motion
 	Player.motion = character.move_and_slide(state.get_motion(delta), Vector2.UP)
-#	print(current_state)
 	if event in transitions:
-		print(event)
 		state.on_exit(character, event)
 		current_state = transitions[event]
-#		print(current_state)
 		state_factory[current_state].on_enter(character)

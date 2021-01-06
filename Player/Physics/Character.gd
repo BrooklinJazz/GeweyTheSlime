@@ -54,17 +54,14 @@ func on_floor():
 func on_left_wall():
 	return left_ray.is_colliding()
 
+func on_wall():
+	return on_left_wall() or on_right_wall()
+
 func _ready():
 	Animations = PlayerAnimate.new($Sprites/Body, $Sprites/Legs)
 	StateMachine = PlayerStateMachine.new()
 
 func _physics_process(delta):
-	print({
-		"on_ceiling": on_ceiling(),
-		"on_left_wall": on_left_wall(),
-		"on_right_wall": on_right_wall(),
-		"on_floor": on_floor()
-	})
 	StateMachine.run(self, delta)
 #	self.update_player_motion(delta)
 #	self.update_player_animations()
