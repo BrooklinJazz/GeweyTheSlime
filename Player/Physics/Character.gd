@@ -30,7 +30,6 @@ func rotate_up():
 
 func rotate_left():
 	self.rotation_degrees = 90
-	global_position += Vector2(-8, 0)
 	left_ray = get_node("DownRay")
 	right_ray = get_node("UpRay")
 	down_ray = get_node("RightRay")
@@ -38,7 +37,6 @@ func rotate_left():
 
 func rotate_right():
 	self.rotation_degrees = -90
-	global_position += Vector2(8, 0)
 	left_ray = get_node("UpRay")
 	right_ray = get_node("DownRay")
 	down_ray = get_node("LeftRay")
