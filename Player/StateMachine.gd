@@ -103,6 +103,10 @@ class GrabbedFloorState extends State:
 			
 	func on_enter(character):
 		character.rotate_down()
+		if (Player.previous_motion.x == 0 and Input.is_action_pressed("left")):
+			Player.motion.x = -Player.previous_motion.y
+		elif (Player.previous_motion.x == 0 and Input.is_action_pressed("right")):
+			Player.motion.x = Player.previous_motion.y
 
 	func get_motion(delta: float) -> Vector2:
 		return Vector2(walk(delta),  Player.motion.y)
