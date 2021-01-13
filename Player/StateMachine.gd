@@ -16,8 +16,6 @@ class State:
 	func get_motion(delta: float):
 		return Vector2(0, 0)
 
-#	TODO extract these
-
 	func walk(delta: float) -> float:
 		var motion = Player.motion.x
 		if (Input.is_action_pressed("left")):
@@ -103,6 +101,7 @@ class GrabbedFloorState extends State:
 			
 	func on_enter(character):
 		character.rotate_down()
+#		We have wavedashing now. if you touch this Brooklin will be sad
 		if (Player.previous_motion.x == 0 and Input.is_action_pressed("left")):
 			Player.motion.x = -Player.previous_motion.y
 		elif (Player.previous_motion.x == 0 and Input.is_action_pressed("right")):

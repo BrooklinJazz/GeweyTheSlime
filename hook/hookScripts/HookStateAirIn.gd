@@ -8,7 +8,7 @@ func update_and_return(delta):
 	.update_and_return(delta)
 	if sharedVars.hit:
 		return "latched"
-	if hook.position.distance_to(player.position) < 40:
+	if hook.position.distance_to(player.global_position) < 8:
 		sharedVars.currentMovement = Vector2.ZERO
 		return "idle"
 	return null
@@ -25,8 +25,7 @@ func _move_hook(delta):
 	var hookPos = hook.global_position
 	hook.rotation = hookPos.angle_to_point(playerPos) + deg2rad(90)
 	var speed = sharedVars.currentMovement.length()
-	sharedVars.currentMovement *= 0.95
-	sharedVars.currentMovement += (hookPos.distance_to(playerPos)) \
-						* hookPos.direction_to(playerPos) * delta * max(min(1,(speed+1)/200), 10)
+#	sharedVars.currentMovement *= 0.95
+	sharedVars.currentMovement = hookPos.direction_to(playerPos) * 500
 	sharedVars.hit = hook.move_and_collide(sharedVars.currentMovement*delta)
 
