@@ -100,6 +100,9 @@ class GrabbedFloorState extends State:
 			return Events.RELEASE
 		elif (!character.on_floor()):
 			return Events.FALL
+			
+	func on_enter(character):
+		character.rotate_down()
 
 	func get_motion(delta: float) -> Vector2:
 		return Vector2(walk(delta),  Player.motion.y)
@@ -117,8 +120,10 @@ class RightWallState extends State:
 			return Events.ATTACH_TO_CEILING
 		elif (!character.on_right_wall()):
 			return Events.RELEASE
-		if (!Input.is_action_pressed("grip")):
+		elif (!Input.is_action_pressed("grip")):
 			return Events.RELEASE
+		elif (Input.is_action_pressed("down") and character.on_floor()):
+			return Events.ATTACH_TO_FLOOR
 			
 	func on_enter(character):
 		character.rotate_right()
@@ -137,8 +142,10 @@ class LeftWallState extends State:
 			return Events.ATTACH_TO_CEILING
 		elif (!character.on_left_wall()):
 			return Events.RELEASE
-		if (!Input.is_action_pressed("grip")):
+		elif (!Input.is_action_pressed("grip")):
 			return Events.RELEASE
+		elif (Input.is_action_pressed("down") and character.on_floor()):
+			return Events.ATTACH_TO_FLOOR
 			
 	func on_enter(character):
 		character.rotate_left()
