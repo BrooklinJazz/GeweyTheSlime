@@ -21,6 +21,9 @@ func enter_state(host):
 
 func exit_state(host): return
 
+func shoot_hook():
+#	disable
+	return
 #Private Functions
 func _move_hook(delta):
 	hook.rotation = hook.global_position.angle_to_point(player.global_position) + deg2rad(90)

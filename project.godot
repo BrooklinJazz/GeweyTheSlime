@@ -75,7 +75,7 @@ _global_script_class_icons={
 [application]
 
 config/name="GeweyTheSlime"
-run/main_scene="res://World.tscn"
+run/main_scene="res://BrooklinsPlayground.tscn"
 
 [autoload]
 

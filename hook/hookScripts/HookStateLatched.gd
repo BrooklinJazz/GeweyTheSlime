@@ -20,6 +20,8 @@ func exit_state(host): return
 #Private Functions
 
 func _yank_player(delta):
+	if (Player.state == States.Grabbed.FLOOR):
+		return
 	var playerPos = player.global_position
 	var hookPos = hook.global_position
 	Player.motion += (-delta*pow(hookPos.distance_to(playerPos), pullExpFactor)

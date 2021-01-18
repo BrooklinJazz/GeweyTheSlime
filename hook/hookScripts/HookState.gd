@@ -6,15 +6,16 @@ class_name HookState
 #vars exports to give some customizability to editor will add ranges
 #vars for all children
 export(float) var gravity = 10 #gravity influence on hook when extending out
-export(float) var baseRange = 130
+export(float) var baseRange = 200
 export(float) var maxRange = 500
-export(float) var baseSpeed = 400
+export(float) var baseSpeed = 600
 export(float) var maxSpeed = 800
-export(float) var pullFactor = 5 #constant speed up when pulling player
-export(float) var pullExpFactor = 1.2 #exponent on distance when pulling
-export(float) var slowingFactor = 1 #slows x movement of extending hook approaching max range
-export(float) var chargeRangeFactor = 2 #slows charge rate of launchrange 
+export(float) var pullFactor = 6 #constant speed up when pulling player
+export(float) var pullExpFactor = 1.1 #exponent on distance when pulling
+export(float) var slowingFactor = 1  #slows x movement of extending hook approaching max range
+export(float) var chargeRangeFactor = 0.5 #slows charge rate of launchrange 
 export(float) var chargeSpeedFactor = 4 #slows charge rate of launchspeed
+export(float) var hookPushBackDampener = 0.001
 
 var hook : KinematicBody2D = null
 var player : Object = null
@@ -66,6 +67,7 @@ func handle_input_event(event):
 func shoot_hook():
 	hook.global_position = player.global_position
 	var direction = (hook.get_global_mouse_position()-hook.global_position).normalized()
+	Player.motion += -direction * sharedVars.launchSpeed * sharedVars.launchRange * hookPushBackDampener
 	sharedVars.currentMovement = sharedVars.launchSpeed*direction
 
 func charge_hook(delta):

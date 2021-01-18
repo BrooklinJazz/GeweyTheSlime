@@ -235,6 +235,7 @@ var state_factory = {
 func run(character,  delta):
 	var transitions = FSM[current_state]
 	var state = state_factory[current_state]
+
 	var event = state.get_event(character)
 #	TODO Extract
 	if Player.motion != Vector2.ZERO:
@@ -244,3 +245,4 @@ func run(character,  delta):
 		state.on_exit(character, event)
 		current_state = transitions[event]
 		state_factory[current_state].on_enter(character)
+	Player.state = current_state
