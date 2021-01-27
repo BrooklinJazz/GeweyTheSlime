@@ -1,8 +1,8 @@
 extends Node
 
 const GRAVITY = 400
-const WALK_SPEED = 400
-const JUMP_FORCE = -250.0
+const WALK_SPEED = 200
+const JUMP_FORCE = -150.0
 const ACCELERATION = 200
 
 
@@ -18,13 +18,14 @@ class State:
 
 	func walk(delta: float) -> float:
 		var motion = Player.motion.x
+		
 		if (Input.is_action_pressed("left")):
 			motion += (-WALK_SPEED * delta)
 		elif (Input.is_action_pressed("right")):
 			motion += (WALK_SPEED * delta)
-		else:
-			motion *= 0.95
-		return motion * 0.97
+#		else:
+#			motion *= 0.999
+		return motion * 0.99
 	
 	func fall(delta: float) -> float:
 		return Player.motion.y + (GRAVITY * delta)

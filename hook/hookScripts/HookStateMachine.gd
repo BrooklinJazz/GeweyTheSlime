@@ -18,6 +18,8 @@ func _ready():
 	_enter_state('idle')
 	
 func _physics_process(delta):
+	if(Input.is_action_just_pressed("reset")):
+		get_tree().reload_current_scene()
 #	currentHookState.handle_input_poll(delta)  # if we switch to a polling model
 	var newStateName = currentHookState.update_and_return(delta)
 	if newStateName:

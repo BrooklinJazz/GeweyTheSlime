@@ -6,12 +6,12 @@ class_name HookState
 #vars exports to give some customizability to editor will add ranges
 #vars for all children
 export(float) var gravity = 10 #gravity influence on hook when extending out
-export(float) var baseRange = 200
-export(float) var maxRange = 500
+export(float) var baseRange = 50
+export(float) var maxRange = 200
 export(float) var baseSpeed = 600
 export(float) var maxSpeed = 800
-export(float) var pullFactor = 6 #constant speed up when pulling player
-export(float) var pullExpFactor = 1.1 #exponent on distance when pulling
+export(float) var pullFactor = 5 #constant speed up when pulling player
+export(float) var pullExpFactor = 1.3 #exponent on distance when pulling
 export(float) var slowingFactor = 1  #slows x movement of extending hook approaching max range
 export(float) var chargeRangeFactor = 0.5 #slows charge rate of launchrange 
 export(float) var chargeSpeedFactor = 4 #slows charge rate of launchspeed
